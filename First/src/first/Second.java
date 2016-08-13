@@ -1,10 +1,7 @@
 package first;
 
-public class first {
-
+public class Second {
 	public static void main(String[] args) {
-		System.out.println("First First");
-
+		System.out.println("Second");
 	}
-
 }
