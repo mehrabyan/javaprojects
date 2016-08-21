@@ -2,7 +2,7 @@ package seebattle;
 
 public class Checkfields {
 	int mojno;
-	Coordinat c = new Coordinat();
+	Coordinate c = new Coordinate();
 	// Proveryaetsya mesto dlya Horizontal dir ship
 		void checkH ( int kx , int ky ,int motor ) {
 			c.x = kx; c.y = ky;

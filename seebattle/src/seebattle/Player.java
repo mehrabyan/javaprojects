@@ -3,7 +3,7 @@ package seebattle;
 import java.util.*;
 
 public class Player {
-	Coordinat c;
+	Coordinate c;
 	int[] koordinat = new int[2];
 	Player () {
 		System.out.println("Sozdaem obyekt igrok \n");

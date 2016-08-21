@@ -1,18 +1,37 @@
 package seebattle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Shipsfield {
-	int[][] cell = new int[10][10];
-//	Coordinat c = new Coordinat();
-	Setships setship;
-	Checkfields checkfields;
-	Shipsfield() {
-		checkfields = new Checkfields();
-		setship = new Setships();
-//		System.out.println("Novie pole dlya korabley \n");
-//		 for (c.x = 0; c.x < 10; c.x++) {
-//		  for (c.y = 0; c.y < 10; c.y++){
-//			  cell[c.x][c.y] = 0;
-//		}
-//	 }
-  }
+	private List<Ship> ships = new ArrayList<Ship>();
+	private List<Ship> deadShips = new ArrayList<Ship>();
+	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
+
+	public ShotResult checkShot(Coordinate c) {
+		ShotResult res = null;
+		
+		if(emptyFields.contains(c)) 
+			res = ShotResult.MISS;
+		else {
+			for (Ship ship : ships) {
+				res = ship.processShot(c);
+				
+				switch (res) {
+				case HIT:
+					break;
+				case DEAD:
+					deadShips.add(ship);
+					ships.remove(ship); // Can't be done this way. Need an iterator
+				default:
+					break;
+				}
+				
+				if(res.equals(ShotResult.HIT) || res.equals(ShotResult.DEAD))
+					break;
+			}
+		}
+		
+		return res;
+	}
 }

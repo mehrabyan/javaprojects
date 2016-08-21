@@ -1,7 +1,7 @@
 package seebattle;
 
 public class GameManager {
-	Coordinat c;
+	Coordinate c;
 	Player player1,player2;
 	Allocetships allocated1,allocated2;
 	Target target1,target2;

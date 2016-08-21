@@ -3,7 +3,7 @@ package seebattle;
 import java.util.*;
 
 public class Allocetships {
-	Coordinat c;
+	Coordinate c;
 	Shipsfield field;
 	int[] motor = {4,3,3,2,2,2,1,1,1,1};
 	Allocetships () {
