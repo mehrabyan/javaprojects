@@ -30,6 +30,26 @@ public class Coordinate {
 		this.y = y;
 	}
 
+	public Coordinate nextInRow(Coordinate c) {	// mybe void ?
+		c.x++;
+		return c;
+	}
+	
+	public Coordinate previousInRow(Coordinate c) {	// mybe void ?
+		c.x--;
+		return c;
+	}
+	
+	public Coordinate nextInColm(Coordinate c) {	// mybe void ?
+		c.y++;
+		return c;
+	}
+	
+	public Coordinate previousInColm(Coordinate c) {	// mybe void ?
+		c.y--;
+		return c;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
