@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
+	Coordinate c;
 	private int motors;
-	private List<Coordinate> blocks = new ArrayList<Coordinate>();
+    private List<Coordinate> blocks = new ArrayList<Coordinate>();
 //	private ShipState state;
 	
 	public Ship(List<Coordinate> blocks) {
@@ -22,9 +23,9 @@ public class Ship {
 		this.motors = motors;
 	}
 	
-//	public ShipState getState() {
-//		return state;
-//	}
+	public void addToBlocks(Coordinate c) {
+		blocks.add(c);
+	}
 //	
 //	public void setState(ShipState state) {
 //		this.state = state;
@@ -37,6 +38,8 @@ public class Ship {
 	public void setBlocks(List<Coordinate> blocks) {
 		this.blocks = blocks;
 	}
+	
+
 
 	public ShotResult processShot(Coordinate c) {
 		if(blocks.contains(c)) {

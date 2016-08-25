@@ -29,6 +29,11 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public void setC(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	public Coordinate nextInRow(Coordinate c) {	// mybe void ?
 		c.x++;
