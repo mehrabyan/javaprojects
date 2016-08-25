@@ -26,6 +26,7 @@ public class Shipsfield {
 				case DEAD:
 					deadShips.add(ship);
 					iterships.remove(); // Can't be done this way. Need an iterator
+					
 				default:
 					break;
 				}
@@ -44,9 +45,9 @@ public class Shipsfield {
 // I way.  All coordinates from c[0,0] to c[9,9] replace into emptyFields 
 	public void fillEmptyFields () {
 		c.setC(0, 0);
-		for (int i = 0; i < 10; i++){
-			for (int j = 0; j < 10; j++){
-				emptyFields.add(c);
+		for (int i = 0; i < 10; i++){		//	as alternative emptyFields.add(c.set(i,j) 
+			for (int j = 0; j < 10; j++){	//	
+				emptyFields.add(c);			//
 				c.nextInRow(c);
 			}
 				c.nextInColm(c);

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Player {
 	Coordinate c;
-	private List<Coordinate> previouseShot = new ArrayList<Coordinate>();
+	protected List<Coordinate> previouseShot = new ArrayList<Coordinate>();
 	Random rrr = new Random();
 
 	  public Coordinate pli(Shipsfield shipsfield) {	// player choose target random
@@ -20,7 +20,7 @@ public class Player {
 //			else {	
 //				System.out.println(c.toString() + " coodinate was already shooted,try again");
 //				c.setC(0,0);
-//                return c; // isn't correct.redo method?
+//                return c; // isn't correct.How redo method?
 //			}
  }			
 }
