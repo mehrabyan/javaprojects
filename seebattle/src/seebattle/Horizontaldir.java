@@ -13,21 +13,26 @@ public class Horizontaldir implements SetCoordinate {
 			c.setX(rand.nextInt(8) + 1);
 			c.setY(rand.nextInt(8) + 1);
 			int count = 0;
-// check all coordinat (motor) in emptyFields,if all necessery coordinates are in the emptyfields
-		     for (int i = 0; i< mot; i++)
-		    	 if (field.emptyFields.contains(c)) {
-		    		 count++;
-		    		 c.nextInRow(c);
+// check all coordinates (motor) in emptyFields,if all necessery coordinates are in the emptyfields
+		for (int i = 0; i< mot; i++)
+		   if (field.emptyFields.contains(c)) {
+			   count++;
+			   c.nextInRow(c);
 		    	 }
 		     
 // set its to ship blocks and delete from emptyFields 
-		     if (count == mot) {
-		    	 for (int i = 0; i< mot; i++) {
-		    		 ship.addToBlocks(c);
-		    		 field.emptyFields.remove(c);
-		    		 c.previousInRow(c);
-		    	     }
-		    	field.addtToListShips(new Ship(blocks));	// create ship with that coordinates
+		   if (count == mot) {
+			   for (int i = 0; i< mot; i++) {
+		    	ship.addToBlocks(c);
+		    	field.emptyFields.remove(c);
+		    	c.previousInRow(c);
+		      }
+		   field.addtToListShips(new Ship(blocks));	// create ship with that coordinates
 		     }
-	  }
+		}
+		
+// Method sets coordinates around the horizontal dir ship
+		public void setCoordsAroundShips(Coordinate c,int motor) {
+			
+		}
 }
