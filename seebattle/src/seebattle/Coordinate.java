@@ -35,24 +35,22 @@ public class Coordinate {
 		this.y = y;
 	}
 
-	public Coordinate nextInRow(Coordinate c) {	// mybe void ?
-		c.x++;
-		return c;
+	public Coordinate nextInRow() {	// mybe void ?
+		return new Coordinate(x + 1, y);
 	}
 	
-	public Coordinate previousInRow(Coordinate c) {	// mybe void ?
+	public Coordinate previousInRow() {	// mybe void ?
 		c.x--;
 		return c;
 	}
 	
-	public Coordinate nextInColm(Coordinate c) {	// mybe void ?
+	public Coordinate nextInColm() {	// mybe void ?
 		c.y++;
 		return c;
 	}
 	
-	public Coordinate previousInColm(Coordinate c) {	// mybe void ?
-		c.y--;
-		return c;
+	public Coordinate previousInColm() {	// mybe void ?
+		return new Coordinate(x, y - 1);
 	}
 	
 	@Override
