@@ -34,22 +34,20 @@ public class Coordinate {
 		this.x = x;
 		this.y = y;
 	}
-
-	public Coordinate nextInRow() {	// mybe void ?
+	
+	public Coordinate nextInRow() {	
 		return new Coordinate(x + 1, y);
 	}
 	
-	public Coordinate previousInRow() {	// mybe void ?
-		c.x--;
-		return c;
+	public Coordinate previousInRow() {
+		return new Coordinate(x - 1,y);
 	}
 	
-	public Coordinate nextInColm() {	// mybe void ?
-		c.y++;
-		return c;
+	public Coordinate nextInColm() {
+		return new Coordinate(x,y + 1);
 	}
 	
-	public Coordinate previousInColm() {	// mybe void ?
+	public Coordinate previousInColm() {
 		return new Coordinate(x, y - 1);
 	}
 	
@@ -80,6 +78,6 @@ public class Coordinate {
 
 	@Override
 	public String toString() {
-		return "Coordinate [x=" + x + ", y=" + y + "]";
+		return "(" + x + "," + y + ")";
 	}
 }

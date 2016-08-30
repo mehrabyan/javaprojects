@@ -8,6 +8,8 @@ public class Ship {
 	private int motors;
     private List<Coordinate> blocks = new ArrayList<Coordinate>();
 //	private ShipState state;
+    
+    public Ship() {}
 	
 	public Ship(List<Coordinate> blocks) {
 		this.blocks = blocks;
@@ -39,6 +41,9 @@ public class Ship {
 		this.blocks = blocks;
 	}
 	
+	public int getSizeOfBlocks() {
+		return blocks.size();
+	}
 
 
 	public ShotResult processShot(Coordinate c) {

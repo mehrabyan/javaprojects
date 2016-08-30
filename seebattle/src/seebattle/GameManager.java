@@ -1,54 +1,47 @@
 package seebattle;
 
-import java.util.*;
+//import java.util.*;
 
 public class GameManager {
 	Coordinate c;
-	int dir;
-	Random rr = new Random();
+	Ship ship1,ship2;
+	Setships set = new Setships();
 	Player player1,player2;
 	Shipsfield shipsfield1,shipsfield2;
+	Switchshot switchshot;
 	GameManager () {
-		player1 = new Player();
-		player2 = new Player();
+		ship1 = new Ship();
+//		player1 = new Player();
+//		player2 = new Player();
 	    shipsfield1 = new Shipsfield();
 	    shipsfield2 = new Shipsfield();
+	    switchshot = new Switchshot();
 		} //konec konstruktora
-	void createEmptyField () {
+	public void createEmptyField () {
 		shipsfield1.fillEmptyFields();
-		System.out.println(shipsfield1.emptyFields);
+		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
 		shipsfield2.fillEmptyFields();
-		System.out.println(shipsfield2.mptyFields);
-
+		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsfield1.sizeOfEmptyFields());
 	}	
 	
-	void createListOfShips() {
-		dir = rr.nextInt(2);
-	}
+	public void setShips() {
+		set.setShip4ForTest(shipsfield1);
+		set.setShip3ForTest(shipsfield1);
+		set.setShip2ForTest(shipsfield1);
+		set.setShip1ForTest(shipsfield1);
+		System.out.println("The size of emptyFields after ships seting on the shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
+		System.out.println("The blocks :" + shipsfield1.toString());
 		
-// player1 shoot,gm check rezult and define who is  next shooter
-//  	ShotResult shres; 
-//		c = player1.pli(shipsfield2);
-//		if (!(player1.previouseShot.contains(c))){
-//			
-//		    player1.previouseShot.add(c);
-//		    
-//		    shres = shipsfield2.checkShot(c);
-//		    switch (shres) {
-//		    case HIT:
-//		    	System.out.println("The ship is Hit");
-//		    	// player1 continues
-//		    case DEAD:
-//		    	if (shipsfield2.ships.size() == 0) {
-//		    		System.out.println("Game over");
-// 					Finish game
-//		    	}
-//		    	break;
-//		    case MISS:
-//		    	c = player2.pli(shipsfield1);
-//		    	break;
-//		       }
-//		   	}
-//					
-//     }
+		set.setShip4ForTest(shipsfield2);
+		set.setShip3ForTest(shipsfield2);
+		set.setShip2ForTest(shipsfield2);
+		set.setShip1ForTest(shipsfield2);
+		System.out.println("The size of emptyFields after ships seting on the shipsfield2 is :" + shipsfield2.sizeOfEmptyFields());
+		System.out.println("The blocks :" + shipsfield2.toString());
+	}
+
+// player1 start the game
+	public void Naabordaj() {
+		switchshot.switchToPlayer1();
+	}
 }

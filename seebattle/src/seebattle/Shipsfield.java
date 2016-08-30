@@ -11,6 +11,7 @@ public class Shipsfield {
 	private List<Ship> deadShips = new ArrayList<Ship>();					//
 	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();		//
 
+
 	public ShotResult checkShot(Coordinate c) {
 		ShotResult res = null;
 		
@@ -25,8 +26,9 @@ public class Shipsfield {
 					break;
 				case DEAD:
 					deadShips.add(ship);
+//					iterships.next();
 					iterships.remove(); // Can't be done this way. Need an iterator
-					
+					break;
 				default:
 					break;
 				}
@@ -39,18 +41,43 @@ public class Shipsfield {
 		return res;
 	}
 
-	public void addtToListShips(Ship ship){
+	public void addToListShips(Ship ship){
 		ships.add(ship);
 	}
+	
+	public void removeFromEmptyFields (Coordinate c) {
+		emptyFields.remove(c);
+	}
+	
+	public int checkListOfShips() {
+		return ships.size();
+	}
+	
+	public String showHitShips() {
+		for (Ship ship: ships) {
+			if (ship.getMotors() > ship.getSizeOfBlocks())
+		return ship.toString();
+			}
+	}
+	
+	public String showDeadShips() {
+		return "Deadships= [" + deadShips +"]"; 
+	}
+	
+	@Override
+	public String toString() {
+		return "Shipsfield [ships=" + ships + "]";
+	}
+	
 // I way.  All coordinates from c[0,0] to c[9,9] replace into emptyFields 
 	public void fillEmptyFields () {
-		c.setC(0, 0);
-		for (int i = 0; i < 10; i++){		//	as alternative emptyFields.add(c.set(i,j) 
-			for (int j = 0; j < 10; j++){	//	
-				emptyFields.add(c);			//
-				c.nextInRow(c);
-			}
-				c.nextInColm(c);
+		c = new Coordinate();
+		  for (int i = 0; i < 10; i++){ 
+			for (int j = 0; j < 10; j++)	
+				emptyFields.add(new Coordinate(i,j));
 		}
 	}
+	public int sizeOfEmptyFields() {
+		return emptyFields.size();
+		}
 }
