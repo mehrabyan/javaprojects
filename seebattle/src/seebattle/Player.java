@@ -10,8 +10,8 @@ public class Player {
 	Random coordind = new Random();
 	
 	Player() {
-         	 for (int i = 1; i < 9; i++){	// we don't need the coordinate with 0 and 9 		 
-			   for (int j = 1; j < 9; j++){		
+         	 for (int i = 1; i < 10; i++){	// we don't need the coordinate with 0 and 10 		 
+			   for (int j = 1; j < 10; j++){		
 					targetForShot.add(new Coordinate(i,j));
 //			   System.out.print(c.toString());
 			   }
@@ -20,6 +20,7 @@ public class Player {
    	}
          	
 	public Coordinate pli() {	
+		System.out.println("Target size is :" + sizeOfTargetForShot());
 		  plicoordind = coordind.nextInt(targetForShot.size());
 		  c = targetForShot.get(plicoordind);
 		  System.out.println("My target is :" +  c.toString());
@@ -33,7 +34,7 @@ public class Player {
 		System.out.println("The shoot history :" + shotHistory.toString());
 	}
 	
-	public int sizeOftargetForShot() {
+	public int sizeOfTargetForShot() {
 		return targetForShot.size();
 	}
 }

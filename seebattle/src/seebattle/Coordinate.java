@@ -13,6 +13,8 @@ public class Coordinate {
 		this.x = x;
 		this.y = y;
 	}
+	
+//	can coordinate tell as about his around coordinates ?
 
 	public int getX() {
 		return x;

@@ -15,11 +15,10 @@ public class Switchshot {
 	}
 
 	public void switchToPlayer1() {	
-		ShotResult res = null;
+		ShotResult res;
 		c = player1.pli();
 		System.out.println("Player1 shoots.Press enter to continue");
 		res = shipsfield2.checkShot(c);
-		System.out.println(res);
 		switch (res) {
 			case MISS:
 				System.out.println("The shot is miss,Player2 shooting");
@@ -37,7 +36,7 @@ public class Switchshot {
 					  System.out.println("Player1 wins.Game over");
 //					  Gameover.functions;
 //					  Show all statistic dates about shots,dead and hit ships
-					  break; }
+				    }
 				  	System.out.println("Player1 continues shooting");
 				  	switchToPlayer1();
 				break;
@@ -53,7 +52,7 @@ public class Switchshot {
 		res = shipsfield1.checkShot(c);
 		switch (res) {
 		case MISS:
-			System.out.println("The shot is miss,Player2 shooting");
+			System.out.println("The shot is miss,Player1 shooting");
 			switchToPlayer1();
 			break;
 			
@@ -67,7 +66,7 @@ public class Switchshot {
 			  if (shipsfield2.checkListOfShips() == 0) {
 				  System.out.println("Player2 wins.Game over");
 //				  Gameover.functions;
-				  break; }
+				 }
 			  	System.out.println("Player2 continues shooting");
 			  	switchToPlayer2();
 			 break;

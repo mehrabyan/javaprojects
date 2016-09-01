@@ -30,6 +30,7 @@ public class GameManager {
 		set.setShip2ForTest(shipsfield1);
 		set.setShip1ForTest(shipsfield1);
 		System.out.println("The size of emptyFields after ships seting on the shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
+//		System.out.println("After ships :" + shipsfield1.showemptyFields());
 		System.out.println("The blocks :" + shipsfield1.toString());
 		
 		set.setShip4ForTest(shipsfield2);
