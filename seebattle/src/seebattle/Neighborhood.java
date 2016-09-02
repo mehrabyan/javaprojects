@@ -10,16 +10,14 @@ public class Neighborhood {
 	
 	public void makeEnvironment(Coordinate c) {
 		
-		for(int i = -1;i < 2;i++) {
-			c = new Coordinate(c.getX() + i,c.getY() - 1);
-			environment.add(c);
-		}
-		for(int i = -1;i < 2;i++) {
-			c = new Coordinate(c.getX() + i,c.getY() + 1);
-			environment.add(c);
-		}
-		environment.add(c.previousInRow());
+		environment.add(c.upperCornerLeft());
+		environment.add(c.previousInColm());
+		environment.add(c.upperCornerRight());
 		environment.add(c.nextInRow());
+		environment.add(c.bottomCornerRight());
+		environment.add(c.nextInColm());
+		environment.add(c.bottomCornerLeft());
+		environment.add(c.previousInRow());
 	}
 
 	public List<Coordinate> getEnvironmet() {

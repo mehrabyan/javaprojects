@@ -14,7 +14,7 @@ public class Coordinate {
 		this.y = y;
 	}
 	
-//	can coordinate tell as about his around coordinates ?
+//	can coordinate tell as about his environment ?
 
 	public int getX() {
 		return x;
@@ -51,6 +51,22 @@ public class Coordinate {
 	
 	public Coordinate previousInColm() {
 		return new Coordinate(x, y - 1);
+	}
+	
+	public Coordinate upperCornerLeft() {
+		return new Coordinate(x - 1, y - 1);
+	}
+	
+	public Coordinate bottomCornerLeft() {
+		return new Coordinate(x - 1, y + 1);
+	}
+	
+	public Coordinate upperCornerRight() {
+		return new Coordinate(x + 1, y - 1);
+	}
+	
+	public Coordinate bottomCornerRight() {
+		return new Coordinate(x + 1, y + 1);
 	}
 	
 	@Override
