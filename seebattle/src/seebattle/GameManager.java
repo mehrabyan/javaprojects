@@ -11,8 +11,9 @@ public class GameManager {
 	Switchshot switchshot;
 	GameManager () {
 		ship1 = new Ship();
-//		player1 = new Player();
-//		player2 = new Player();
+		ship2 = new Ship();
+		player1 = new Player();
+		player2 = new Player();
 	    shipsfield1 = new Shipsfield();
 	    shipsfield2 = new Shipsfield();
 	    switchshot = new Switchshot();
