@@ -57,7 +57,7 @@ public class Coordinate {
 		return new Coordinate(x - 1, y - 1);
 	}
 	
-	public Coordinate bottomCornerLeft() {
+	public Coordinate lowerCornerLeft() {
 		return new Coordinate(x - 1, y + 1);
 	}
 	
@@ -65,7 +65,7 @@ public class Coordinate {
 		return new Coordinate(x + 1, y - 1);
 	}
 	
-	public Coordinate bottomCornerRight() {
+	public Coordinate lowerCornerRight() {
 		return new Coordinate(x + 1, y + 1);
 	}
 	

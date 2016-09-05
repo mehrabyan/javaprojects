@@ -1,21 +1,22 @@
 package seebattle;
 
 public class Bookkeeping {
-	Player player1,player2;
-	Shipsfield field1,field2;
-	Ship ship;
 	
-// class shows the list of deadships,
-	public void showAllDeadShips() {
-		System.out.println("The list of dead ships for player1 is :" + field1.showDeadShips());
-		System.out.println("The list of dead ships for player2 is :" + field2.showDeadShips());
+// calculate the deadships,
+	public void allDeadShips(Shipsfield field1,Shipsfield field2) {
+		System.out.println("Player1 destroys " + field2.sizeOfDeadShips() + " ships");
+		System.out.println("Player2 destroys " + field1.sizeOfDeadShips() + " ships");
 	}
 //	list of hit ships 
-	public void showHitShips() {
-		System.out.println("The list of hit ships for player1 is :" + field1.showHitShips());
-		System.out.println("The list of hit ships for player2 is :" + field2.showHitShips());
+	public void showHitShips(Shipsfield field1,Shipsfield field2) {
+		System.out.println("Player1 has the list of hit ships :" + field1.showHitShips());
+		System.out.println("Player2 has the list of hit ships :" + field2.showHitShips());
 	}
 	
-//	list of shot history for each player,calculate shots for each player
+//	calculate shots for each player
+	public void showShots(Player player1,Player player2) {
+		System.out.println("Player1 makes " + player1.madeShot() + " shots");
+		System.out.println("Player2 makes " + player2.madeShot() + " shots");
+	}
 	
 }
