@@ -5,15 +5,14 @@ import java.util.*;
 
 public class Player {
 	private String name;
-
 	private List<Coordinate> targetForShot = new ArrayList<Coordinate>();
 	private List<Coordinate> shotHistory = new ArrayList<Coordinate>();
 
 	public Player(String name) {
 		this.name = name;
-		for (int i = 1; i < 10; i++) { // we don't need the coordinate with 0
-										// and 10
-			for (int j = 1; j < 10; j++) {
+		for (int i = 1; i < 9; i++) { // we don't need the coordinate with 0
+										// and 9
+			for (int j = 1; j < 9; j++) {
 				targetForShot.add(new Coordinate(i, j));
 			}
 		}
@@ -40,7 +39,7 @@ public class Player {
 	}
 
 	public int madeShot() {
-		return (81 - targetForShot.size());
+		return (64 - targetForShot.size());
 	}
 	
 	public String getName() {

@@ -9,12 +9,20 @@ public class GameManager {
 
 	GameManager() {
 		player1 = new Player("Player1");
-		player2 = new Player("Player2");
 		shipsfield1 = new Shipsfield();
 		shipsfield2 = new Shipsfield();
 		currentPlayer = player1;
 		currentShipsfield = shipsfield2;
 	} // konec konstruktora
+	
+	public void gameCvsC() {
+		player2 = new Player("Player2");
+	}
+	
+	public void gameCvsH() {
+		HumanPlayer human = new HumanPlayer();
+	    player2 = (human);
+	}
 
 	private void switchPlayer() {
 		if (currentPlayer == player1) {
@@ -51,7 +59,7 @@ public class GameManager {
 		System.out.println("The blocks :" + shipsfield2.toString());
 	}
 
-	public void startGame() {
+	public void initGameData() {
 		createEmptyFields();
 		setShips();
 	}
