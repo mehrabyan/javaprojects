@@ -8,20 +8,29 @@ public class GameManager {
 	Shipsfield shipsfield1, shipsfield2, currentShipsfield;
 
 	GameManager() {
-		player1 = new Player("Player1");
 		shipsfield1 = new Shipsfield();
 		shipsfield2 = new Shipsfield();
-		currentPlayer = player1;
-		currentShipsfield = shipsfield2;
+//		currentShipsfield = shipsfield2;
 	} // konec konstruktora
 	
-	public void gameCvsC() {
-		player2 = new Player("Player2");
+	public void gameCompVsComp() {
+		player1 = new CompPlayer("Player1");
+		player2 = new CompPlayer("Player2");
 	}
 	
-	public void gameCvsH() {
-		HumanPlayer human = new HumanPlayer();
-	    player2 = (human);
+	public void gameCompVsHuman() {
+		player1 = new CompPlayer("Player1");
+	    player2 = new HumanPlayer("Nemo");
+	}
+	
+	public void gameHumanVsHuman() {
+		player1 = new HumanPlayer("Aranaks");
+	    player2 = new HumanPlayer("Nemo");
+	}
+	
+	public void initCurrentPlayer() {
+		currentPlayer = player1;
+		currentShipsfield = shipsfield2;
 	}
 
 	private void switchPlayer() {
@@ -60,6 +69,7 @@ public class GameManager {
 	}
 
 	public void initGameData() {
+		initCurrentPlayer();
 		createEmptyFields();
 		setShips();
 	}
@@ -104,9 +114,9 @@ public class GameManager {
 
 	public void statistics() {
 		Bookkeeping book = new Bookkeeping();
-		book.allDeadShips(shipsfield1, shipsfield2);
+		book.allDeadShips(shipsfield1, shipsfield2,player1,player2);
 		book.showShots(player1, player2);
-		book.showHitShips(shipsfield1, shipsfield2);
+		book.showHitShips(shipsfield1, shipsfield2,player1,player2);
 
 	}
 }
