@@ -1,5 +1,11 @@
 package seebattle;
 
+import seebattle.fieldandships.Coordinate;
+import seebattle.fieldandships.Setships;
+import seebattle.fieldandships.Shipsfield;
+import seebattle.fieldandships.ShotResult;
+import seebattle.player.*;
+
 //import java.util.*;
 
 public class GameManager {
@@ -7,21 +13,33 @@ public class GameManager {
 	Player player1, player2, currentPlayer;
 	Shipsfield shipsfield1, shipsfield2, currentShipsfield;
 
-	GameManager() {
-		player1 = new Player("Player1");
+	public GameManager() {
 		shipsfield1 = new Shipsfield();
+		shipsfield1.fillEmptyFields();
+		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
 		shipsfield2 = new Shipsfield();
+		shipsfield2.fillEmptyFields();
+		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsfield1.sizeOfEmptyFields());
+	}
+
+	public void gameCompVsComp() {
+		player1 = new CompPlayer("Player1");
+		player2 = new CompPlayer("Player2");
+	}
+
+	public void gameCompVsHuman() {
+		player1 = new CompPlayer("Player1");
+		player2 = new HumanPlayer("Nemo");
+	}
+
+	public void gameHumanVsHuman() {
+		player1 = new HumanPlayer("Aranaks");
+		player2 = new HumanPlayer("Nemo");
+	}
+
+	private void initCurrentPlayer() {
 		currentPlayer = player1;
 		currentShipsfield = shipsfield2;
-	} // konec konstruktora
-	
-	public void gameCvsC() {
-		player2 = new Player("Player2");
-	}
-	
-	public void gameCvsH() {
-		HumanPlayer human = new HumanPlayer();
-	    player2 = (human);
 	}
 
 	private void switchPlayer() {
@@ -32,13 +50,6 @@ public class GameManager {
 			currentPlayer = player1;
 			currentShipsfield = shipsfield2;
 		}
-	}
-
-	private void createEmptyFields() {
-		shipsfield1.fillEmptyFields();
-		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
-		shipsfield2.fillEmptyFields();
-		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsfield1.sizeOfEmptyFields());
 	}
 
 	private void setShips() {
@@ -60,7 +71,7 @@ public class GameManager {
 	}
 
 	public void initGameData() {
-		createEmptyFields();
+		initCurrentPlayer();
 		setShips();
 	}
 
@@ -75,7 +86,7 @@ public class GameManager {
 	public void naabordaj() {
 		boolean gameOver = false;
 		while (!gameOver) {
-			 System.out.print(currentPlayer.getName() + " is shooting.");
+			System.out.print(currentPlayer.getName() + " is shooting.");
 			switch (pliPlayer()) {
 
 			case HIT:
@@ -87,7 +98,7 @@ public class GameManager {
 					System.out.println("Continues shooting");
 				} else {
 					gameOver = true;
-					 System.out.println(currentPlayer.getName() + " wins.Game over");
+					System.out.println(currentPlayer.getName() + " wins.Game over");
 					System.out.println();
 				}
 				break;
@@ -104,9 +115,8 @@ public class GameManager {
 
 	public void statistics() {
 		Bookkeeping book = new Bookkeeping();
-		book.allDeadShips(shipsfield1, shipsfield2);
+		book.allDeadShips(shipsfield1, shipsfield2, player1, player2);
 		book.showShots(player1, player2);
-		book.showHitShips(shipsfield1, shipsfield2);
-
+		book.showHitShips(shipsfield1, shipsfield2, player1, player2);
 	}
 }

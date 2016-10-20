@@ -1,14 +1,16 @@
-package seebattle;
+package seebattle.player;
 
 import java.util.Random;
 
+import seebattle.fieldandships.Coordinate;
+
 public class CompPlayer extends Player {
-	CompPlayer(String name) {
+	public CompPlayer(String name) {
 		super(name);
 	}
 
 	@Override
-  public Coordinate pli() {
+	public Coordinate pli() {
 		Coordinate c;
 		int plicoordind;
 		Random coordind = new Random();
@@ -17,5 +19,5 @@ public class CompPlayer extends Player {
 		getShotHistory().add(c);
 		getTargetForShot().remove(c);
 		return c;
-  }
+	}
 }

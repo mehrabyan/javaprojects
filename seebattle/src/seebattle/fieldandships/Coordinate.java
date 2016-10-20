@@ -1,4 +1,4 @@
-package seebattle;
+package seebattle.fieldandships;
 
 public class Coordinate {
 	private int x;
@@ -8,13 +8,13 @@ public class Coordinate {
 		this.x = 0;
 		this.y = 0;
 	}
-	
+
 	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
-//	can coordinate tell as about his environment ?
+
+	// can coordinate tell as about his environment ?
 
 	public int getX() {
 		return x;
@@ -31,44 +31,44 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 	public void setC(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public Coordinate nextInRow() {	
+
+	public Coordinate nextInRow() {
 		return new Coordinate(x + 1, y);
 	}
-	
+
 	public Coordinate previousInRow() {
-		return new Coordinate(x - 1,y);
+		return new Coordinate(x - 1, y);
 	}
-	
+
 	public Coordinate nextInColm() {
-		return new Coordinate(x,y + 1);
+		return new Coordinate(x, y + 1);
 	}
-	
+
 	public Coordinate previousInColm() {
 		return new Coordinate(x, y - 1);
 	}
-	
+
 	public Coordinate upperCornerLeft() {
 		return new Coordinate(x - 1, y - 1);
 	}
-	
+
 	public Coordinate lowerCornerLeft() {
 		return new Coordinate(x - 1, y + 1);
 	}
-	
+
 	public Coordinate upperCornerRight() {
 		return new Coordinate(x + 1, y - 1);
 	}
-	
+
 	public Coordinate lowerCornerRight() {
 		return new Coordinate(x + 1, y + 1);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

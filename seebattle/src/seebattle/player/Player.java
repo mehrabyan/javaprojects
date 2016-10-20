@@ -1,11 +1,15 @@
 // Sozdaem class igrokov
-package seebattle;
+package seebattle.player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Player {
+import seebattle.fieldandships.Coordinate;
+
+abstract public class Player {
 	private String name;
 	private List<Coordinate> targetForShot = new ArrayList<Coordinate>();
+
 	private List<Coordinate> shotHistory = new ArrayList<Coordinate>();
 
 	public Player(String name) {
@@ -18,16 +22,22 @@ public class Player {
 		}
 	}
 
-	public Coordinate pli() {
-		Coordinate c;
-		int plicoordind;
-		Random coordind = new Random();
-		plicoordind = coordind.nextInt(targetForShot.size());
-		c = targetForShot.get(plicoordind);
-		shotHistory.add(c);
-		targetForShot.remove(c);
-		// int enter = System.in.read();
-		return c;
+	abstract public Coordinate pli();
+
+	public List<Coordinate> getTargetForShot() {
+		return targetForShot;
+	}
+
+	public void setTargetForShot(List<Coordinate> targetForShot) {
+		this.targetForShot = targetForShot;
+	}
+
+	public List<Coordinate> getShotHistory() {
+		return shotHistory;
+	}
+
+	public void setShotHistory(List<Coordinate> shotHistory) {
+		this.shotHistory = shotHistory;
 	}
 
 	public List<Coordinate> showShotHistory() {
@@ -39,9 +49,9 @@ public class Player {
 	}
 
 	public int madeShot() {
-		return (64 - targetForShot.size());
+		return shotHistory.size();
 	}
-	
+
 	public String getName() {
 		return name;
 	}

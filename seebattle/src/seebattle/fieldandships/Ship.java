@@ -1,4 +1,4 @@
-package seebattle;
+package seebattle.fieldandships;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,32 +6,33 @@ import java.util.List;
 public class Ship {
 	Coordinate c;
 	private int motors;
-    private List<Coordinate> blocks = new ArrayList<Coordinate>();
-//	private ShipState state;
-    
-    public Ship() {}
-	
+	private List<Coordinate> blocks = new ArrayList<Coordinate>();
+	// private ShipState state;
+
+	public Ship() {
+	}
+
 	public Ship(List<Coordinate> blocks) {
 		this.blocks = blocks;
 		this.motors = blocks.size();
-//		this.state = ShipState.NEW;
+		// this.state = ShipState.NEW;
 	}
-	
+
 	public int getMotors() {
 		return motors;
 	}
-	
+
 	public void setMotors(int motors) {
 		this.motors = motors;
 	}
-	
+
 	public void addToBlocks(Coordinate c) {
 		blocks.add(c);
 	}
-//	
-//	public void setState(ShipState state) {
-//		this.state = state;
-//	}
+	//
+	// public void setState(ShipState state) {
+	// this.state = state;
+	// }
 
 	public List<Coordinate> getBlocks() {
 		return blocks;
@@ -40,17 +41,16 @@ public class Ship {
 	public void setBlocks(List<Coordinate> blocks) {
 		this.blocks = blocks;
 	}
-	
+
 	public int getSizeOfBlocks() {
 		return blocks.size();
 	}
 
-
 	public ShotResult processShot(Coordinate c) {
-		if(blocks.contains(c)) {
+		if (blocks.contains(c)) {
 			blocks.remove(c);
 
-			if(blocks.size() == 0)
+			if (blocks.size() == 0)
 				return ShotResult.DEAD;
 			else
 				return ShotResult.HIT;
@@ -58,14 +58,14 @@ public class Ship {
 			return ShotResult.MISS;
 		}
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((blocks == null) ? 0 : blocks.hashCode());
 		result = prime * result + motors;
-//		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		// result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 
@@ -85,8 +85,8 @@ public class Ship {
 			return false;
 		if (motors != other.motors)
 			return false;
-//		if (state != other.state)
-//			return false;
+		// if (state != other.state)
+		// return false;
 		return true;
 	}
 

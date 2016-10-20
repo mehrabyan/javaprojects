@@ -1,0 +1,6 @@
+The help for seebattle game.
+There are three point in new game menu.
+When You choose game type comp vs human, or
+human vs human you must enter the target
+coordinates step by step.
+ 

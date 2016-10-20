@@ -1,4 +1,4 @@
-package seebattle;
+package seebattle.fieldandships;
 
 public enum ShotResult {
 	HIT,
