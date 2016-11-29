@@ -1,6 +1,7 @@
 package seebattle.allmanus;
 
 public class Terminal {
+	String[] mm = { "Please,choose from main menu.", "1 - new game.", "2 - hepl.", "3 - exit game.", };
 
 	protected void mainChoose() throws java.io.IOException {
 		menuForGame();
@@ -26,14 +27,7 @@ public class Terminal {
 	}
 
 	private void menuForGame() {
-		System.out.println("Please,choose from main menu.");
-		System.out.println("1 - new game.");
-		System.out.println();
-		System.out.println("2 - hepl.");
-		System.out.println();
-		System.out.println("3 - exit game.");
-		System.out.println();
+		for (int i = 0; i < mm.length; i++)
+			System.out.println(mm[i]);
 	}
-
-	
 }
