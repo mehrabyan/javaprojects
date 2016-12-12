@@ -1,10 +1,10 @@
-package seebattle.fieldandships;
+package seebattle.fieldsandships;
 
-public class Setships {
+public class SetShips {
 	Ship ship;
-	Shipsfield shipsfield;
+	ShipsField shipsfield;
 
-	public void setShip4ForTest(Shipsfield shipsfield) {
+	public void setShip4ForTest(ShipsField shipsfield) {
 		// set 4
 		ship = new Ship();
 		ship.addToBlocks(new Coordinate(1, 1));
@@ -16,7 +16,7 @@ public class Setships {
 
 	// set 3
 	// I - 3
-	public void setShip3ForTest(Shipsfield shipsfield) {
+	public void setShip3ForTest(ShipsField shipsfield) {
 		ship = new Ship();
 		ship.addToBlocks(new Coordinate(7, 6));
 		ship.addToBlocks(new Coordinate(7, 7));
@@ -33,7 +33,7 @@ public class Setships {
 	// set 2
 	// I - 2
 
-	public void setShip2ForTest(Shipsfield shipsfield) {
+	public void setShip2ForTest(ShipsField shipsfield) {
 		ship = new Ship();
 		ship.addToBlocks(new Coordinate(3, 2));
 		ship.addToBlocks(new Coordinate(3, 3));
@@ -53,7 +53,7 @@ public class Setships {
 	}
 	// set 1
 
-	public void setShip1ForTest(Shipsfield shipsfield) {
+	public void setShip1ForTest(ShipsField shipsfield) {
 		ship = new Ship();
 		ship.addToBlocks(new Coordinate(8, 1));
 		shipsfield.addToListShips(new Ship(ship.getBlocks()));

@@ -1,4 +1,4 @@
-package seebattle.fieldandships;
+package seebattle.fieldsandships;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ public class Ship {
 	Coordinate c;
 	private int motors;
 	private List<Coordinate> blocks = new ArrayList<Coordinate>();
+	private List<Coordinate> shipEnvironment = new ArrayList<Coordinate>();
 	// private ShipState state;
 
 	public Ship() {
@@ -27,7 +28,7 @@ public class Ship {
 	}
 
 	public void addToBlocks(Coordinate c) {
-		blocks.add(c);
+		this.blocks.add(c);
 	}
 	//
 	// public void setState(ShipState state) {
@@ -44,6 +45,30 @@ public class Ship {
 
 	public int getSizeOfBlocks() {
 		return blocks.size();
+	}
+	
+	public Coordinate shipUpperCornerLeft() {
+		c = this.getBlocks().get(0);
+		c = c.upperCornerLeft();
+		return c;
+	}
+	
+	public Coordinate shipUpperCornerRight() {
+		c = this.getBlocks().get(motors - 1);
+		c = c.upperCornerRight();
+		return c;
+	}
+	
+	public Coordinate shipLowerCornerLeft() {
+		c = this.getBlocks().get(0);
+		c = c.lowerCornerLeft();
+		return c;
+	}
+	
+	public Coordinate shipLowerCornerRight() {
+		c = this.getBlocks().get(motors - 1);
+		c = c.lowerCornerRight();
+		return c;
 	}
 
 	public ShotResult processShot(Coordinate c) {
@@ -93,5 +118,9 @@ public class Ship {
 	@Override
 	public String toString() {
 		return "Ship [motors=" + motors + ", blocks=" + blocks + "]";
+	}
+
+	public List<Coordinate> getShipEnvironment() {
+		return shipEnvironment;
 	}
 }

@@ -4,7 +4,7 @@ package seebattle.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import seebattle.fieldandships.Coordinate;
+import seebattle.fieldsandships.Coordinate;
 
 abstract public class Player {
 	private String name;

@@ -1,25 +1,29 @@
 package seebattle;
 
-import seebattle.fieldandships.Coordinate;
-import seebattle.fieldandships.Setships;
-import seebattle.fieldandships.Shipsfield;
-import seebattle.fieldandships.ShotResult;
-import seebattle.player.*;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import seebattle.fieldsandships.Coordinate;
+import seebattle.fieldsandships.NewSetShips;
+import seebattle.fieldsandships.ShipsField;
+import seebattle.fieldsandships.ShotResult;
+import seebattle.player.CompPlayer;
+import seebattle.player.HumanPlayer;
+import seebattle.player.Player;
 
 //import java.util.*;
 
 public class GameManager {
-	Setships set = new Setships();
+//	SetShips set = new SetShips();
+	NewSetShips newSet = new NewSetShips();
 	Player player1, player2, currentPlayer;
-	Shipsfield shipsfield1, shipsfield2, currentShipsfield;
+	ShipsField shipsField1, shipsField2, currentShipsField;
 
 	public GameManager() {
-		shipsfield1 = new Shipsfield();
-		shipsfield1.fillEmptyFields();
-		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
-		shipsfield2 = new Shipsfield();
-		shipsfield2.fillEmptyFields();
-		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsfield1.sizeOfEmptyFields());
+		shipsField1 = new ShipsField();
+		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
+		shipsField2 = new ShipsField();
+		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsField1.sizeOfEmptyFields());
 	}
 
 	public void gameCompVsComp() {
@@ -39,40 +43,69 @@ public class GameManager {
 
 	private void initCurrentPlayer() {
 		currentPlayer = player1;
-		currentShipsfield = shipsfield2;
+		currentShipsField = shipsField2;
 	}
 
 	private void switchPlayer() {
 		if (currentPlayer == player1) {
 			currentPlayer = player2;
-			currentShipsfield = shipsfield1;
+			currentShipsField = shipsField1;
 		} else {
 			currentPlayer = player1;
-			currentShipsfield = shipsfield2;
+			currentShipsField = shipsField2;
 		}
 	}
 
 	private void setShips() {
-		set.setShip4ForTest(shipsfield1);
-		set.setShip3ForTest(shipsfield1);
-		set.setShip2ForTest(shipsfield1);
-		set.setShip1ForTest(shipsfield1);
+//		set.setShip4ForTest(shipsfield1);
+//		set.setShip3ForTest(shipsfield1);
+//		set.setShip2ForTest(shipsfield1);
+//		set.setShip1ForTest(shipsfield1);
+		newSet.SetShips(shipsField1);
 		System.out.println(
-				"The size of emptyFields after ships seting on the shipsfield1 is :" + shipsfield1.sizeOfEmptyFields());
-		System.out.println("The blocks :" + shipsfield1.toString());
+				"The size of emptyFields after ships seting on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
+//		System.out.println("The blocks of ships in field1 :" + shipsField1.getShipsEnvironment().toString());
+		try (FileWriter writer = new FileWriter("res/Shipsfield.txt", true)) {
+			String text = "The blocks of ships in field1 :" + shipsField1.toString();
+			
+			writer.write(text);
+			
+			writer.append('\n');
 
-		set.setShip4ForTest(shipsfield2);
-		set.setShip3ForTest(shipsfield2);
-		set.setShip2ForTest(shipsfield2);
-		set.setShip1ForTest(shipsfield2);
+			writer.flush();
+		} catch (IOException ex) {
+
+			System.out.println(ex.getMessage());
+		}
+
+
+//		set.setShip4ForTest(shipsfield2);
+//		set.setShip3ForTest(shipsfield2);
+//		set.setShip2ForTest(shipsfield2);
+//		set.setShip1ForTest(shipsfield2);
+		newSet.SetShips(shipsField2);
 		System.out.println(
-				"The size of emptyFields after ships seting on the shipsfield2 is :" + shipsfield2.sizeOfEmptyFields());
-		System.out.println("The blocks :" + shipsfield2.toString());
+				"The size of emptyFields after ships seting on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
+//		System.out.println("The blocks of ships in field2 :" + shipsField2.toString());
+		try (FileWriter writer = new FileWriter("res/Shipsfield.txt", true)) {
+			String text = "The blocks of ships in field2 :" + shipsField2.toString();
+			
+			writer.write(text);
+			
+			writer.append('\n');
+
+			writer.flush();
+		} catch (IOException ex) {
+
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	public void initGameData() {
 		initCurrentPlayer();
 		setShips();
+//		newSet.printShipEnvironment(shipsField1);
+//		newSet.printShipEnvironment(shipsField2);
 	}
 
 	// make Game Manager really GM // all functions to flow game
@@ -80,7 +113,7 @@ public class GameManager {
 		Coordinate c;
 		c = currentPlayer.pli();
 		System.out.println("The target is :" + c.toString());
-		return currentShipsfield.checkShot(c);
+		return currentShipsField.checkShot(c);
 	}
 
 	public void naabordaj() {
@@ -94,7 +127,7 @@ public class GameManager {
 				break;
 			case DEAD:
 				System.out.println("The ship is dead");
-				if (!(currentShipsfield.checkListOfShips() == 0)) {
+				if (!(currentShipsField.checkListOfShips() == 0)) {
 					System.out.println("Continues shooting");
 				} else {
 					gameOver = true;
@@ -115,8 +148,8 @@ public class GameManager {
 
 	public void statistics() {
 		Bookkeeping book = new Bookkeeping();
-		book.allDeadShips(shipsfield1, shipsfield2, player1, player2);
+		book.allDeadShips(shipsField1, shipsField2, player1, player2);
 		book.showShots(player1, player2);
-		book.showHitShips(shipsfield1, shipsfield2, player1, player2);
+		book.showHitShips(shipsField1, shipsField2, player1, player2);
 	}
 }

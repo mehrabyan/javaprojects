@@ -3,7 +3,7 @@ package seebattle.allmanus;
 public class Terminal {
 	String[] mm = { "Please,choose from main menu.", "1 - new game.", "2 - hepl.", "3 - exit game.", };
 
-	protected void mainChoose() throws java.io.IOException {
+	public void mainChoose() throws java.io.IOException {
 		menuForGame();
 		char choose;
 		do {
