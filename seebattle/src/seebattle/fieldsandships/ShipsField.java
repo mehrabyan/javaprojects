@@ -7,7 +7,7 @@ public class ShipsField {
 	Random rd2 = new Random();
 	Coordinate c;
 	private List<Ship> ships = new ArrayList<Ship>();
-	private Set<Coordinate> shipsEnvironment = new HashSet<Coordinate>();
+//	private Set<Coordinate> shipsEnvironment = new HashSet<Coordinate>();
 	private List<Ship> deadShips = new ArrayList<Ship>();
 	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
 	private List<Coordinate> tempForShipsSet = new ArrayList<Coordinate>();
@@ -24,7 +24,7 @@ public class ShipsField {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				c = new Coordinate(i, j);
-//				c.setMarker('u');
+				c.setMarker('u');
 				tempForShipsSet.add(c);
 			}
 		}
@@ -77,6 +77,7 @@ public class ShipsField {
 
 	public Coordinate getCoordFromTemp(int j, int i) {
 		int index = 0;
+		c.setC(j, i);
 		if (tempForShipsSet.contains(c))
 		index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index);
@@ -220,32 +221,29 @@ public class ShipsField {
 	// }
 
 	public Coordinate PlaceForShipH(int mot) {
+		boolean valid = false;
 		Coordinate c1 = null;
-		boolean validPlace = false;
-		while (!validPlace) {
-			int x = rd1.nextInt(7) + 1;
-			int y = rd2.nextInt(7) + 1;
+		while (!valid) {
+			int y = rd1.nextInt(8) + 1;
+			int x = rd2.nextInt(8) + 1;
 			c = getCoordFromTemp(y, x);
 			c1 = c;
-			for (int i = 0; i < mot; i++) {
-				if (shipsEnvironment.contains(c1)) {
-					System.out.println("can not take " + c1 + ", it contains in ...");
-					validPlace = false;
+			for (int a = 1; a < mot; a++) {
+				if (c1.isMarked()) {
 					break;
-				}
-				else  {
+				} else {
 					if (c.getX() + mot <= 9)
 						c1 = getNextCoordInRowFromTemp(c1);
 					else
 						c1 = getPreviousCoordInRowFromTemp(c1);
 				}
-			
-				}
+				if (a == mot - 1)
+					valid = true;
+			}
 		}
-		
 		if (c.getX() >= c1.getX())
 			c = c1;
-		System.out.println("returned c :" + c + " : " + c.getMarker() + "\n");
+		System.out.println("returned" + c + " : " + c.getMarker());
 		return c;
 	}
 
@@ -323,10 +321,9 @@ public class ShipsField {
 		for (int y = c1.getY(); y <= c2.getY(); y++) {
 			for (int x = c1.getX(); x <= c3.getX(); x++) {
 				 getCoordFromTemp(y, x).setMarker('m');
-				 shipsEnvironment.add(getCoordFromTemp(y, x));
+//				 shipsEnvironment.add(new Coordinate(y, x));
 			}
 		}
-		System.out.println(shipsEnvironment.toString());
 	}
 
 	// public void setShipsEnvironmentV(Ship ship) {
