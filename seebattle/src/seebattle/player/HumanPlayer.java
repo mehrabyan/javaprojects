@@ -2,7 +2,7 @@ package seebattle.player;
 
 import java.util.Scanner;
 
-import seebattle.fieldandships.Coordinate;
+import seebattle.fieldsandships.Coordinate;
 
 public class HumanPlayer extends Player {
 	Coordinate c = new Coordinate();

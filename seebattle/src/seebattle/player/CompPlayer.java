@@ -1,7 +1,8 @@
 package seebattle.player;
 
 import java.util.Random;
-import seebattle.fieldandships.Coordinate;
+
+import seebattle.fieldsandships.Coordinate;
 
 public class CompPlayer extends Player {
 	public CompPlayer(String name) {
@@ -14,9 +15,10 @@ public class CompPlayer extends Player {
 		int plicoordind;
 		Random coordind = new Random();
 		plicoordind = coordind.nextInt(getTargetForShot().size());
+//		System.out.println("\n" + "Index for Tergetforshot " + plicoordind);
 		c = getTargetForShot().get(plicoordind);
 		getShotHistory().add(c);
-		getTargetForShot().remove(c);
+//		getTargetForShot().remove(c);
 		return c;
 	}
 }

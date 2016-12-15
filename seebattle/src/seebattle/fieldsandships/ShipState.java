@@ -1,4 +1,4 @@
-package seebattle.fieldandships;
+package seebattle.fieldsandships;
 
 public enum ShipState {
 	NEW,

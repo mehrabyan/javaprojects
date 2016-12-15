@@ -4,7 +4,7 @@ package seebattle.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import seebattle.fieldandships.Coordinate;
+import seebattle.fieldsandships.Coordinate;
 
 abstract public class Player {
 	private String name;
@@ -12,6 +12,7 @@ abstract public class Player {
 
 	private List<Coordinate> shotHistory = new ArrayList<Coordinate>();
 
+	
 	public Player(String name) {
 		this.name = name;
 		for (int i = 1; i < 9; i++) { // we don't need the coordinate with 0
@@ -39,6 +40,7 @@ abstract public class Player {
 	public void setShotHistory(List<Coordinate> shotHistory) {
 		this.shotHistory = shotHistory;
 	}
+
 
 	public List<Coordinate> showShotHistory() {
 		return shotHistory;

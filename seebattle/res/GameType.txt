@@ -1,0 +1,29 @@
+1:"New game"
+1.1:"Comp vs Comp"
+1.1.1:"Local game"
+1.1.2:"Game online"
+
+1.2:"Comp vs Human"
+1.2.1:"Local game"
+1.2.2:"Game online
+
+1.3:"Human vs Human"
+1.3.1:"Local game"
+1.3.2:"Game online
+
+2:"Load game"
+2.1:"Load game ..."
+2.2:"Load game from ... path"
+
+3:"Save game"
+3.1:"Save to..."
+3.2:"Save to...path "
+
+4:"Help"
+4.1:"Large help"
+4.2:" Help"
+
+5:"Exit"
+5.1:"Exit with saving"
+5.2:"Exit"
+ 
