@@ -1,7 +1,6 @@
 package seebattle.player;
 
 import java.util.Random;
-
 import seebattle.fieldandships.Coordinate;
 
 public class CompPlayer extends Player {
