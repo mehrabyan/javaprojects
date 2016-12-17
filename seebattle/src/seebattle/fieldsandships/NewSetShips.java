@@ -4,10 +4,11 @@ import java.util.*;
 
 public class NewSetShips {
 	ShipsField shipsField;
-	private int[] motor = { 4, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
+	private int[] motor = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
 	Random rddir = new Random();
 
-	public void SetShips(ShipsField shipsField) {
+	public void setShp(ShipsField shipsField) {
+//		shipsField.SetShip4H();
 		for (int mot : motor) {
 //			int dir = rddir.nextInt(2);
 //			switch (dir) {

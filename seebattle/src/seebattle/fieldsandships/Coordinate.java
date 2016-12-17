@@ -1,18 +1,18 @@
 package seebattle.fieldsandships;
 
 public class Coordinate {
-	private int y;
 	private int x;
+	private int y;
 	private char marker;
 
 	public Coordinate() {
-		this.y = 0;
 		this.x = 0;
+		this.y = 0;
 	}
 
-	public Coordinate(int y, int x) {
-		this.y = y;
+	public Coordinate(int x, int y) {
 		this.x = x;
+		this.y = y;
 //		marker = 'u';
 	}
 
@@ -35,74 +35,74 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	public void setC(int y, int x) {
+	
+	public void setC(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
 	public boolean hasNextInRow() {
-		return (this.getX() + 1) <= 9;
+		return (this.getY() + 1) <= 9;
 	}
 
 	public Coordinate nextInRow() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y, x + 1);
+		return new Coordinate(x, y + 1);
 	}
 
 	public boolean hasPreviuosInRow() {
-		return (this.getX() - 1) >= 0;
+		return (this.getY() - 1) >= 0;
 	}
 
 	public Coordinate previousInRow() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y, x - 1);
+		return new Coordinate(x, y - 1);
 	}
 
 	public boolean hasNextInColm() {
-		return (this.getY() + 1) <= 9;
+		return (this.getX() + 1) <= 9;
 	}
 
 	public Coordinate nextInColm() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y + 1, x);
+		return new Coordinate(x + 1, y);
 	}
 
 	public boolean hasPreviuosInColm() {
-		return (this.getY() - 1) >= 0;
+		return (this.getX() - 1) >= 0;
 	}
 
 	public Coordinate previousInColm() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y - 1, x);
+		return new Coordinate(x - 1, y);
 	}
 
 	public Coordinate upperCornerLeft() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y - 1, x - 1);
+		return new Coordinate(x - 1, y - 1);
 	}
 
 	public Coordinate lowerCornerLeft() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y + 1, x - 1);
+		return new Coordinate(x + 1, y - 1);
 	}
 
 	public Coordinate upperCornerRight() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y - 1, x + 1);
+		return new Coordinate(x - 1, y + 1);
 	}
 
 	public Coordinate lowerCornerRight() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y + 1, x + 1);
+		return new Coordinate(x + 1, y + 1);
 	}
 
 	@Override

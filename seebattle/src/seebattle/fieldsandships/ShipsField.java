@@ -4,10 +4,9 @@ import java.util.*;
 
 public class ShipsField {
 	Random rd1 = new Random();
-	Random rd2 = new Random();
 	Coordinate c;
 	private List<Ship> ships = new ArrayList<Ship>();
-//	private Set<Coordinate> shipsEnvironment = new HashSet<Coordinate>();
+	// private Set<Coordinate> shipsEnvironment = new HashSet<Coordinate>();
 	private List<Ship> deadShips = new ArrayList<Ship>();
 	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
 	private List<Coordinate> tempForShipsSet = new ArrayList<Coordinate>();
@@ -20,7 +19,6 @@ public class ShipsField {
 				emptyFields.add(new Coordinate(i, j));
 			}
 		}
-
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				c = new Coordinate(i, j);
@@ -64,9 +62,9 @@ public class ShipsField {
 		this.tempForShipsSet = tempForShipsSet;
 	}
 
-	public Coordinate getCoordFromEmptyFields(int i, int j) {
+	public Coordinate getCoordFromEmptyFields(int x, int y) {
 		int index;
-		c.setC(i, j);
+		c.setC(x, y);
 		index = emptyFields.indexOf(c);
 		return emptyFields.get(index);
 	}
@@ -75,40 +73,52 @@ public class ShipsField {
 		return tempForShipsSet.get(i);
 	}
 
-	public Coordinate getCoordFromTemp(int j, int i) {
+	public Coordinate getCoordFromTemp(int x, int y) {
 		int index = 0;
-		c.setC(j, i);
+		c.setC(x, y);
 		if (tempForShipsSet.contains(c))
-		index = tempForShipsSet.indexOf(c);
+			index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index);
 	}
 
 	public Coordinate getNextCoordInRowFromTemp(Coordinate c) {
 		int index = 0;
 		if (tempForShipsSet.contains(c))
-		index = tempForShipsSet.indexOf(c);
+			index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index + 1);
 	}
 
 	public Coordinate getPreviousCoordInRowFromTemp(Coordinate c) {
 		int index = 0;
 		if (tempForShipsSet.contains(c))
-		index = tempForShipsSet.indexOf(c);
+			index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index - 1);
 	}
 
 	public Coordinate getNextCoordInColmFromTemp(Coordinate c) {
 		int index = 0;
 		if (tempForShipsSet.contains(c))
-		index = tempForShipsSet.indexOf(c);
+			index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index + 10);
 	}
 
 	public Coordinate getPreviousCoordInColmFromTemp(Coordinate c) {
 		int index = 0;
 		if (tempForShipsSet.contains(c))
-		index = tempForShipsSet.indexOf(c);
+			index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index - 10);
+	}
+
+	public Coordinate getUpperLeftCoordFromTemp(Coordinate c) {
+		int x = c.getX();
+		int y = c.getY();
+		return getCoordFromTemp(x - 1, y - 1);
+	}
+
+	public Coordinate getLowerRightCoordFromTemp(Coordinate c) {
+		int x = c.getX();
+		int y = c.getY();
+		return getCoordFromTemp(x + 1, y + 1);
 	}
 
 	public List<Coordinate> getEmptyFields() {
@@ -183,6 +193,17 @@ public class ShipsField {
 		return emptyFields;
 	}
 
+	public void SetShip4H() {
+		Ship ship = new Ship();
+		ship.addToBlocks(new Coordinate(1, 1));
+		ship.addToBlocks(new Coordinate(1, 2));
+		ship.addToBlocks(new Coordinate(1, 3));
+		ship.addToBlocks(new Coordinate(1, 4));
+		ship.setMotors(4);
+		setH_ShipsEnvironmentMarkers(ship);
+		addToListShips(new Ship(ship.getBlocks()));
+	}
+
 	public void SetShipH(int mot) {
 		Ship ship = new Ship();
 		c = PlaceForShipH(mot);
@@ -194,6 +215,7 @@ public class ShipsField {
 		// mark H_ship environment
 		setH_ShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
+		System.out.println(toString());
 	}
 
 	// public void SetShipV(int mot) {
@@ -221,27 +243,30 @@ public class ShipsField {
 	// }
 
 	public Coordinate PlaceForShipH(int mot) {
-		boolean valid = false;
+		boolean validPlace = false;
 		Coordinate c1 = null;
-		while (!valid) {
+		while (!validPlace) {
+			int x = rd1.nextInt(8) + 1;
 			int y = rd1.nextInt(8) + 1;
-			int x = rd2.nextInt(8) + 1;
-			c = getCoordFromTemp(y, x);
+//			System.out.println("coord :( x , " + y + ")");
+			c = getCoordFromTemp(x, y);
+//			System.out.println(c + " " + c.getMarker());
 			c1 = c;
 			for (int a = 1; a < mot; a++) {
 				if (c1.isMarked()) {
 					break;
 				} else {
-					if (c.getX() + mot <= 9)
+					if (c.getY() + mot < 9)
 						c1 = getNextCoordInRowFromTemp(c1);
 					else
 						c1 = getPreviousCoordInRowFromTemp(c1);
 				}
-				if (a == mot - 1)
-					valid = true;
+				if ((a == mot - 1) && !(c1.isMarked()))
+					validPlace = true;
 			}
 		}
-		if (c.getX() >= c1.getX())
+		System.out.println("aaaaaaaa" + c + " : " + c.getMarker());
+		if (c.getY() >= c1.getY())
 			c = c1;
 		System.out.println("returned" + c + " : " + c.getMarker());
 		return c;
@@ -314,14 +339,21 @@ public class ShipsField {
 	// }
 
 	public void setH_ShipsEnvironmentMarkers(Ship ship) {
-		Coordinate c1, c2, c3;
-		c1 = ship.shipUpperCornerLeft();
-		c2 = ship.shipLowerCornerLeft();
-		c3 = ship.shipUpperCornerRight();
-		for (int y = c1.getY(); y <= c2.getY(); y++) {
-			for (int x = c1.getX(); x <= c3.getX(); x++) {
-				 getCoordFromTemp(y, x).setMarker('m');
-//				 shipsEnvironment.add(new Coordinate(y, x));
+		Coordinate c, c1, c2;
+		c = ship.getBlocks().get(0);
+		int i = c.getX();
+		int j = c.getY();
+		c = getCoordFromTemp(i, j);
+		c1 = getUpperLeftCoordFromTemp(c);
+		c = ship.getBlocks().get(ship.getMotors() - 1);
+		i = c.getX();
+		j = c.getY();
+		c = getCoordFromTemp(i, j);
+		c2 = getLowerRightCoordFromTemp(c);
+		for (int x = c1.getX(); x <= c2.getX(); x++) {
+			for (int y = c1.getY(); y <= c2.getY(); y++) {
+				getCoordFromTemp(x, y).setMarker('m');
+				// shipsEnvironment.add(new Coordinate(x, y));
 			}
 		}
 	}

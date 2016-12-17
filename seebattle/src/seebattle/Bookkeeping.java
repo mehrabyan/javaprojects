@@ -1,3 +1,5 @@
+package seebattle;
+
 import seebattle.fieldsandships.ShipsField;
 import seebattle.player.Player;
 
