@@ -21,8 +21,10 @@ public class GameManager {
 
 	public GameManager() {
 		shipsField1 = new ShipsField();
+		newSet.initTempForShipsSet(shipsField1);
 		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
 		shipsField2 = new ShipsField();
+		newSet.initTempForShipsSet(shipsField2);
 		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsField1.sizeOfEmptyFields());
 	}
 

@@ -6,6 +6,17 @@ public class NewSetShips {
 	ShipsField shipsField;
 	private int[] motor = { 4, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
 	Random rddir = new Random();
+	
+	public void initTempForShipsSet(ShipsField shipsField) {
+		Coordinate c;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				c = new Coordinate(i, j);
+				c.setMarker('u');
+				shipsField.getTempForShipsSet().add(c);
+			}
+		}
+	}
 
 	public void SetShips(ShipsField shipsField) {
 		for (int mot : motor) {

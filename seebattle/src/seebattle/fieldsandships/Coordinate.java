@@ -1,18 +1,18 @@
 package seebattle.fieldsandships;
 
 public class Coordinate {
-	private int y;
 	private int x;
+	private int y;
 	private char marker;
 
 	public Coordinate() {
-		this.y = 0;
 		this.x = 0;
+		this.y = 0;
 	}
 
-	public Coordinate(int y, int x) {
-		this.y = y;
+	public Coordinate(int x, int y) {
 		this.x = x;
+		this.y = y;
 //		marker = 'u';
 	}
 
@@ -36,7 +36,7 @@ public class Coordinate {
 		this.y = y;
 	}
 
-	public void setC(int y, int x) {
+	public void setC(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -48,7 +48,7 @@ public class Coordinate {
 	public Coordinate nextInRow() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y, x + 1);
+		return new Coordinate(x + 1, y);
 	}
 
 	public boolean hasPreviuosInRow() {
@@ -58,7 +58,7 @@ public class Coordinate {
 	public Coordinate previousInRow() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y, x - 1);
+		return new Coordinate(x - 1, y);
 	}
 
 	public boolean hasNextInColm() {
@@ -68,7 +68,7 @@ public class Coordinate {
 	public Coordinate nextInColm() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y + 1, x);
+		return new Coordinate(x, y + 1);
 	}
 
 	public boolean hasPreviuosInColm() {
@@ -78,31 +78,31 @@ public class Coordinate {
 	public Coordinate previousInColm() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y - 1, x);
+		return new Coordinate(x, y - 1);
 	}
 
 	public Coordinate upperCornerLeft() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y - 1, x - 1);
+		return new Coordinate(x - 1, y - 1);
 	}
 
 	public Coordinate lowerCornerLeft() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y + 1, x - 1);
+		return new Coordinate(x - 1, y + 1);
 	}
 
 	public Coordinate upperCornerRight() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y - 1, x + 1);
+		return new Coordinate(x + 1, y - 1);
 	}
 
 	public Coordinate lowerCornerRight() {
 		int x = this.getX();
 		int y = this.getY();
-		return new Coordinate(y + 1, x + 1);
+		return new Coordinate(x + 1, y + 1);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class Coordinate {
 
 	@Override
 	public String toString() {
-		return "(" + x + "," + y + ")";
+		return "(" + y + "," + x + ")";
 	}
 
 	public char getMarker() {

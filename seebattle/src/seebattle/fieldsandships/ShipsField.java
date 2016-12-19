@@ -3,8 +3,6 @@ package seebattle.fieldsandships;
 import java.util.*;
 
 public class ShipsField {
-	Random rd1 = new Random();
-	Random rd2 = new Random();
 	Coordinate c;
 	private List<Ship> ships = new ArrayList<Ship>();
 //	private Set<Coordinate> shipsEnvironment = new HashSet<Coordinate>();
@@ -21,13 +19,13 @@ public class ShipsField {
 			}
 		}
 
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				c = new Coordinate(i, j);
-				c.setMarker('u');
-				tempForShipsSet.add(c);
-			}
-		}
+//		for (int i = 0; i < 10; i++) {
+//			for (int j = 0; j < 10; j++) {
+//				c = new Coordinate(i, j);
+//				c.setMarker('u');
+//				tempForShipsSet.add(c);
+//			}
+//		}
 	}
 
 	// can coordinate tells as about his environment ?
@@ -64,20 +62,20 @@ public class ShipsField {
 		this.tempForShipsSet = tempForShipsSet;
 	}
 
-	public Coordinate getCoordFromEmptyFields(int i, int j) {
-		int index;
-		c.setC(i, j);
-		index = emptyFields.indexOf(c);
-		return emptyFields.get(index);
-	}
+//	public Coordinate getCoordFromEmptyFields(int i, int j) {
+//		int index;
+//		c.setC(i, j);
+//		index = emptyFields.indexOf(c);
+//		return emptyFields.get(index);
+//	}
 
-	public Coordinate getCoordByIndexFromTemp(int i) {
-		return tempForShipsSet.get(i);
-	}
+//	public Coordinate getCoordByIndexFromTemp(int i) {
+//		return tempForShipsSet.get(i);
+//	}
 
-	public Coordinate getCoordFromTemp(int j, int i) {
+	public Coordinate getCoordFromTemp(int i, int j) {
 		int index = 0;
-		c.setC(j, i);
+		c.setC(i, j);
 		if (tempForShipsSet.contains(c))
 		index = tempForShipsSet.indexOf(c);
 		return tempForShipsSet.get(index);
@@ -157,9 +155,9 @@ public class ShipsField {
 		return ships.size();
 	}
 
-	public Coordinate getCoordByIndexFromEmptyFields(int i) {
-		return emptyFields.get(i);
-	}
+//	public Coordinate getCoordByIndexFromEmptyFields(int i) {
+//		return emptyFields.get(i);
+//	}
 
 	public List<Ship> showHitShips() {
 		List<Ship> hitShips = new ArrayList<Ship>();
@@ -186,6 +184,9 @@ public class ShipsField {
 	public void SetShipH(int mot) {
 		Ship ship = new Ship();
 		c = PlaceForShipH(mot);
+		int x = c.getX();
+		int y = c.getY();
+		c = new Coordinate(x, y);		
 		for (int k = 0; k < mot; k++) {
 			ship.addToBlocks(c);
 			c = c.nextInRow();
@@ -221,13 +222,18 @@ public class ShipsField {
 	// }
 
 	public Coordinate PlaceForShipH(int mot) {
+		Random rd1 = new Random();
+		Random rd2 = new Random();
 		boolean valid = false;
 		Coordinate c1 = null;
 		while (!valid) {
-			int y = rd1.nextInt(8) + 1;
-			int x = rd2.nextInt(8) + 1;
-			c = getCoordFromTemp(y, x);
+			int x = rd1.nextInt(8) + 1;
+			int y = rd2.nextInt(8) + 1;
+			c = getCoordFromTemp(x, y);
 			c1 = c;
+			System.out.println("x =" + x );
+			System.out.println("y =" + y );
+			System.out.println("c =" + c + " : " + c.getMarker());
 			for (int a = 1; a < mot; a++) {
 				if (c1.isMarked()) {
 					break;
@@ -314,14 +320,14 @@ public class ShipsField {
 	// }
 
 	public void setH_ShipsEnvironmentMarkers(Ship ship) {
-		Coordinate c1, c2, c3;
-		c1 = ship.shipUpperCornerLeft();
-		c2 = ship.shipLowerCornerLeft();
-		c3 = ship.shipUpperCornerRight();
-		for (int y = c1.getY(); y <= c2.getY(); y++) {
-			for (int x = c1.getX(); x <= c3.getX(); x++) {
-				 getCoordFromTemp(y, x).setMarker('m');
-//				 shipsEnvironment.add(new Coordinate(y, x));
+		Coordinate cUL, cLL, cUR;
+		cUL = ship.shipUpperCornerLeft();
+		cLL = ship.shipLowerCornerLeft();
+		cUR = ship.shipUpperCornerRight();
+		for (int x = cUL.getY(); x <= cLL.getY(); x++) {
+			for (int y = cUL.getX(); y <= cUR.getX(); y++) {
+				 getCoordFromTemp(x, y).setMarker('m');
+//				 shipsEnvironment.add(new Coordinate(x, y));
 			}
 		}
 	}
