@@ -15,7 +15,7 @@ import seebattle.player.Player;
 
 public class GameManager {
 //	SetShips set = new SetShips();
-	NewSetShips newSet = new NewSetShips();
+	NewSetShips newSetShips = new NewSetShips();
 	Player player1, player2, currentPlayer;
 	ShipsField shipsField1, shipsField2, currentShipsField;
 
@@ -63,7 +63,7 @@ public class GameManager {
 //		set.setShip3ForTest(shipsfield1);
 //		set.setShip2ForTest(shipsfield1);
 //		set.setShip1ForTest(shipsfield1);
-		newSet.SetShips(shipsField1);
+		newSetShips.setShp(shipsField1);
 		System.out.println(
 				"The size of emptyFields after ships seting on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
 //		System.out.println("The blocks of ships in field1 :" + shipsField1.getShipsEnvironment().toString());
@@ -85,22 +85,22 @@ public class GameManager {
 //		set.setShip3ForTest(shipsfield2);
 //		set.setShip2ForTest(shipsfield2);
 //		set.setShip1ForTest(shipsfield2);
-		newSet.SetShips(shipsField2);
-		System.out.println(
-				"The size of emptyFields after ships seting on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
+//		newSetShips.setShp(shipsField2);
+//		System.out.println(
+//				"The size of emptyFields after ships seting on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
 //		System.out.println("The blocks of ships in field2 :" + shipsField2.toString());
-		try (FileWriter writer = new FileWriter("res/Shipsfield.txt", true)) {
-			String text = "The blocks of ships in field2 :" + shipsField2.toString();
+//		try (FileWriter writer = new FileWriter("res/Shipsfield.txt", true)) {
+//			String text = "The blocks of ships in field2 :" + shipsField2.toString();
 			
-			writer.write(text);
+//			writer.write(text);
 			
-			writer.append('\n');
+//			writer.append('\n');
 
-			writer.flush();
-		} catch (IOException ex) {
+//			writer.flush();
+//		} catch (IOException ex) {
 
-			System.out.println(ex.getMessage());
-		}
+//			System.out.println(ex.getMessage());
+//		}
 	}
 
 	public void initGameData() {
