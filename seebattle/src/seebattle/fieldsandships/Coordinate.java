@@ -132,11 +132,11 @@ public class Coordinate {
 
 	@Override
 	public String toString() {
-		return "(" + y + "," + x + ")";
+		return "(" + x + "," + y + ")";
 	}
 
 	public char getMarker() {
-		return marker;
+		return this.marker;
 	}
 
 	public void setMarker(char marker) {

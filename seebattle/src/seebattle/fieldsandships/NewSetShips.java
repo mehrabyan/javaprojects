@@ -4,23 +4,24 @@ import java.util.*;
 
 public class NewSetShips {
 	ShipsField shipsField;
-	private int[] motor = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
+	private int[] motor = {4, 3, 3, 2, 2, 2,};
 	Random rddir = new Random();
 	
-	public void initTempForShipsSet(ShipsField shipsField) {
-		Coordinate c;
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				c = new Coordinate(i, j);
-				c.setMarker('u');
-				shipsField.getTempForShipsSet().add(c);
-			}
-		}
-	}
+//	public void initTempForShipsSet(ShipsField shipsField) {
+//		Coordinate c;
+//		for (int i = 0; i < 10; i++) {
+//			for (int j = 0; j < 10; j++) {
+//				c = new Coordinate(i, j);
+//				c.setMarker('u');
+//				shipsField.getTempForShipsSet().add(c);
+//			}
+//		}
+//	}
 
 	public void setShp(ShipsField shipsField) {
 //		shipsField.SetShip4H();
 		for (int mot : motor) {
+			System.out.println("now set ship with " + mot + " motors");
 //			int dir = rddir.nextInt(2);
 //			switch (dir) {
 //			case (0):
@@ -31,6 +32,10 @@ public class NewSetShips {
 //				break;
 //			}
 		}
+		for (int i = 0; i < 4; i++) {
+		shipsField.setShip1Mot();
+		}
+		shipsField.showFields();
 	}
 	
 //	public void printShipEnvironment(ShipsField shipsField) {
