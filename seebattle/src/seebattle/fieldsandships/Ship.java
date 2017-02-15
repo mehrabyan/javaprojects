@@ -16,7 +16,6 @@ public class Ship {
 	public Ship(List<Coordinate> blocks) {
 		this.blocks = blocks;
 		this.motors = blocks.size();
-		// this.state = ShipState.NEW;
 	}
 
 	public int getMotors() {
@@ -30,10 +29,6 @@ public class Ship {
 	public void addToBlocks(Coordinate c) {
 		this.blocks.add(c);
 	}
-	//
-	// public void setState(ShipState state) {
-	// this.state = state;
-	// }
 
 	public List<Coordinate> getBlocks() {
 		return blocks;

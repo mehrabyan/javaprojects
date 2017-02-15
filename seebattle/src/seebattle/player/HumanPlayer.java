@@ -9,7 +9,6 @@ public class HumanPlayer extends Player {
 	int a = 0, b = 0;
 	Scanner sc = new Scanner(System.in);
 
-	// private List<Coordinate> shotHistory = new ArrayList<Coordinate>();
 	public HumanPlayer(String name) {
 		super(name);
 	}
@@ -28,9 +27,4 @@ public class HumanPlayer extends Player {
 		getShotHistory().add(c);
 		return c;
 	}
-
-	// public static void main(String[] args) {
-	// HumanPlayer human = new HumanPlayer();
-	// System.out.println("Your targer is " + (human.pli()).toString());
-	// }
 }

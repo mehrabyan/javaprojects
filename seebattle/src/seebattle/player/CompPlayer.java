@@ -15,7 +15,6 @@ public class CompPlayer extends Player {
 		int plicoordind;
 		Random coordind = new Random();
 		plicoordind = coordind.nextInt(getTargetForShot().size());
-//		System.out.println("\n" + "Index for Targetforshot " + plicoordind);
 		c = getTargetForShot().get(plicoordind);
 		getShotHistory().add(c);
 		getTargetForShot().remove(c);
