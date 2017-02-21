@@ -6,85 +6,68 @@ public class ShipsField {
 	Random rd1 = new Random();
 	Coordinate c;
 	private List<Ship> ships = new ArrayList<Ship>();
-	// private Set<Coordinate> shipsEnvironment = new HashSet<Coordinate>();
 	private List<Ship> deadShips = new ArrayList<Ship>();
 	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
-	private List<Coordinate> tempForShipsSet = new ArrayList<Coordinate>();
+//	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
 	// private Iterator<Coordinate> it = emptyFields.iterator();
 
 	public ShipsField() {
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				emptyFields.add(new Coordinate(i, j));
-			}
-		}
+		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				c = new Coordinate(i, j);
 				c.setMarker('u');
-				tempForShipsSet.add(c);
+				emptyFields.add(c);
 			}
 		}
 	}
 
-	public List<Coordinate> getTempForShipsSet() {
-		return tempForShipsSet;
+	public List<Ship> getShips() {
+		return ships;
 	}
-
+	
 	public Coordinate getCoordFromEmptyFields(int x, int y) {
 		return emptyFields.get(10 * x + y);
 	}
 
-	public Coordinate getCoordByIndexFromTemp(int i) {
-		return tempForShipsSet.get(i);
-	}
-
-	public Coordinate getCoordFromTemp(int x, int y) {
-		return tempForShipsSet.get(10 * x + y);
-	}
-
-	public Coordinate getNextCoordInRowFromTemp(Coordinate c) {
+	public Coordinate getNextCoordInRowFromEmptyFields(Coordinate c) {
 		int index = 0;
-		if (tempForShipsSet.contains(c))
-			index = tempForShipsSet.indexOf(c);
-		return tempForShipsSet.get(index + 1);
+		if (emptyFields.contains(c))
+			index = emptyFields.indexOf(c);
+		return emptyFields.get(index + 1);
 	}
 
-	public Coordinate getPreviousCoordInRowFromTemp(Coordinate c) {
+	public Coordinate getPreviousCoordInRowFromEmptyFields(Coordinate c) {
 		int index = 0;
-		if (tempForShipsSet.contains(c))
-			index = tempForShipsSet.indexOf(c);
-		return tempForShipsSet.get(index - 1);
+		if (emptyFields.contains(c))
+			index = emptyFields.indexOf(c);
+		return emptyFields.get(index - 1);
 	}
 
-	public Coordinate getNextCoordInColmFromTemp(Coordinate c) {
+	public Coordinate getNextCoordInColmFromEmptyFields(Coordinate c) {
 		int index = 0;
-		if (tempForShipsSet.contains(c))
-			index = tempForShipsSet.indexOf(c);
-		return tempForShipsSet.get(index + 10);
+		if (emptyFields.contains(c))
+			index = emptyFields.indexOf(c);
+		return emptyFields.get(index + 10);
 	}
 
-	public Coordinate getPreviousCoordInColmFromTemp(Coordinate c) {
+	public Coordinate getPreviousCoordInColmFromEmptyFields(Coordinate c) {
 		int index = 0;
-		if (tempForShipsSet.contains(c))
-			index = tempForShipsSet.indexOf(c);
-		return tempForShipsSet.get(index - 10);
+		if (emptyFields.contains(c))
+			index = emptyFields.indexOf(c);
+		return emptyFields.get(index - 10);
 	}
 
-	public Coordinate getUpperLeftCoordFromTemp(Coordinate c) {
+	public Coordinate getUpperLeftCoordFromEmptyFields(Coordinate c) {
 		int x = c.getX();
 		int y = c.getY();
-		return getCoordFromTemp(x - 1, y - 1);
+		return getCoordFromEmptyFields(x - 1, y - 1);
 	}
 
 	public Coordinate getLowerRightCoordFromTemp(Coordinate c) {
 		int x = c.getX();
 		int y = c.getY();
-		return getCoordFromTemp(x + 1, y + 1);
-	}
-
-	public List<Coordinate> getEmptyFields() {
-		return emptyFields;
+		return getCoordFromEmptyFields(x + 1, y + 1);
 	}
 
 	public ShotResult checkShot(Coordinate c) {
@@ -114,15 +97,16 @@ public class ShipsField {
 		return res;
 	}
 
-	public void addToListShips(Ship ship) { // and remove from emptyFields
+	public void addToListShips(Ship ship) { 
 		ships.add(ship);
-		for (Coordinate c : ship.getBlocks()) {
-			emptyFields.remove(c);
-		}
 	}
-
-	public void removeFromEmptyFields(Coordinate c) {
-		emptyFields.remove(c);
+	
+	public void removeShipsCoordFromEmptyFields() { // remove from emptyFields
+		for (Ship ship : ships) {
+			for (Coordinate c : ship.getBlocks()) {
+				emptyFields.remove(c);	
+			}
+		}
 	}
 
 	public int checkListOfShips() {
@@ -205,7 +189,7 @@ public class ShipsField {
 				mass[t][r] = ' ';
 		}
 
-		for (Coordinate c : tempForShipsSet) {
+		for (Coordinate c : emptyFields) {
 			if (c.isMarked()) {
 				int s = c.getX();
 				int d = c.getY();
@@ -235,7 +219,7 @@ public class ShipsField {
 		while (!validPlace) {
 			int x = rd1.nextInt(8) + 1;
 			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromTemp(x, y);
+			c = getCoordFromEmptyFields(x, y);
 			if (!(c.isMarked()))
 				validPlace = true;
 		}
@@ -248,16 +232,16 @@ public class ShipsField {
 		while (!validPlace) {
 			int x = rd1.nextInt(8) + 1;
 			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromTemp(x, y);
+			c = getCoordFromEmptyFields(x, y);
 			c1 = c;
 			for (int a = 1; a < mot; a++) {
 				if (c1.isMarked()) {
 					break;
 				} else {
 					if (c.getY() + mot <= 9)
-						c1 = getNextCoordInRowFromTemp(c1);
+						c1 = getNextCoordInRowFromEmptyFields(c1);
 					else
-						c1 = getPreviousCoordInRowFromTemp(c1);
+						c1 = getPreviousCoordInRowFromEmptyFields(c1);
 				}
 				if ((a == mot - 1) && !(c1.isMarked()))
 					validPlace = true;
@@ -274,16 +258,16 @@ public class ShipsField {
 		while (!validPlace) {
 			int x = rd1.nextInt(8) + 1;
 			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromTemp(x, y);
+			c = getCoordFromEmptyFields(x, y);
 			c1 = c;
 			for (int a = 1; a < mot; a++) {
 				if (c1.isMarked()) {
 					break;
 				} else {
 					if (c.getX() + mot <= 9)
-						c1 = getNextCoordInColmFromTemp(c1);
+						c1 = getNextCoordInColmFromEmptyFields(c1);
 					else
-						c1 = getPreviousCoordInColmFromTemp(c1);
+						c1 = getPreviousCoordInColmFromEmptyFields(c1);
 				}
 				if ((a == mot - 1) && !(c1.isMarked()))
 					validPlace = true;
@@ -307,16 +291,16 @@ public class ShipsField {
 		c = ship.getBlocks().get(0);
 		int i = c.getX();
 		int j = c.getY();
-		c = getCoordFromTemp(i, j);
-		c1 = getUpperLeftCoordFromTemp(c);
+		c = getCoordFromEmptyFields(i, j);
+		c1 = getUpperLeftCoordFromEmptyFields(c);
 		c = ship.getBlocks().get(ship.getMotors() - 1);
 		i = c.getX();
 		j = c.getY();
-		c = getCoordFromTemp(i, j);
+		c = getCoordFromEmptyFields(i, j);
 		c2 = getLowerRightCoordFromTemp(c);
 		for (int x = c1.getX(); x <= c2.getX(); x++) {
 			for (int y = c1.getY(); y <= c2.getY(); y++) {
-				getCoordFromTemp(x, y).setMarker('m');
+				getCoordFromEmptyFields(x, y).setMarker('m');
 			}
 		}
 	}

@@ -4,11 +4,11 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class NodesForMenu {
+public class NodesForTree {
 	private String line = null;
 	private List<String> linesMenuText = new ArrayList<String>();
 
-	public NodesForMenu() throws IOException {
+	public NodesForTree() throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("src/res/MenuText"));
 		while ((line = reader.readLine()) != null) {
 			linesMenuText.add(line);

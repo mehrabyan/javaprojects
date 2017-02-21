@@ -1,10 +1,10 @@
 package seebattle;
 
-import seebattle.allmanus.Terminal;
+import menutree.TreeForMenu;
 
 public class StartGame {
-	public static void main(String[] args) throws java.io.IOException {
-		Terminal terminal = new Terminal();
-		terminal.mainChoose();
+	public static void main(String[] args) throws Exception {
+		TreeForMenu tfm = new TreeForMenu();
+		tfm.generateMenuForGame();
 	}
  }

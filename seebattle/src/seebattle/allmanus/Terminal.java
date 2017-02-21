@@ -11,7 +11,7 @@ public class Terminal {
 			switch (choose) {
 			case '1':
 				StartSeans ss = new StartSeans();
-				ss.startSeans();
+				ss.startSeans(1);
 				break;
 			case '2':
 				// help menu

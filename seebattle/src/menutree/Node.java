@@ -18,6 +18,19 @@ public class Node<T> {
 	public T getContent() {
 		return content;
 	}
+	
+	public Integer getKey() {
+		Node<String> node =new Node<String>();//что хотим найти
+		for (Integer key : children.keySet()) {
+		    Node<T> nd = children.get(key);
+		    if (key != null) {
+		        if (node.equals(nd)) {
+		            return key; // нашли наше значение и возвращаем  ключ
+	           }
+		    }
+		}
+		return null;
+	}
 
 	public void setContent(T content) {
 		this.content = content;
@@ -58,13 +71,13 @@ public class Node<T> {
 		}
 	}
 	
-	public boolean isLeaf() {
+	public boolean isTerminalNode() {
 		return getChildren().isEmpty();
 
 	}
 	
-	public boolean hasChildren() {
-		return getChildren() != null;
-	}
+//	public Integer getNodeKye() {
+//		return 1;
+//	}
 	
 }

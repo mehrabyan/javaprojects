@@ -55,38 +55,14 @@ public class GameManager {
 
 	private void setShips() {
 		newSetShips.allocetShip(shipsField1);
+		shipsField1.removeShipsCoordFromEmptyFields();
 		System.out.println(
 				"The size of emptyFields after ships seting on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
-		try (FileWriter writer = new FileWriter("res/Shipsfield.txt", true)) {
-			String text = "The blocks of ships in field1 :" + shipsField1.toString();
-			
-			writer.write(text);
-			
-			writer.append('\n');
-
-			writer.flush();
-		} catch (IOException ex) {
-
-			System.out.println(ex.getMessage());
-		}
 		newSetShips.allocetShip(shipsField2);
+		shipsField2.removeShipsCoordFromEmptyFields();
 		System.out.println(
 				"The size of emptyFields after ships seting on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
-		try (FileWriter writer = new FileWriter("res/Shipsfield.txt", true)) {
-			String text = "The blocks of ships in field2 :" + shipsField2.toString();
-			
-			writer.write(text);
-			
-			writer.append('\n');
-
-			writer.flush();
-		} catch (IOException ex) {
-
-			System.out.println(ex.getMessage());
-		}
-
-
-	}
+}
 
 	public void initGameData() {
 		initCurrentPlayer();

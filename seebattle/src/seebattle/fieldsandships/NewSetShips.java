@@ -24,4 +24,19 @@ public class NewSetShips {
 		}
 		shipsField.showFields();
 	}
+	
+	public void correctAllocation(ShipsField shipsField) {
+		while (!(shipsField.getShips().size() == 10)) {
+			long start = System.currentTimeMillis();
+			System.out.println("AA : " + (start));
+		do {
+			
+			allocetShip(shipsField);
+//			return;	
+		}	while (start < start + 5);
+//		Thread.currentThread().interrupt();
+		System.out.println("AA : " + (start));
+	}
+		shipsField.showFields();
+ }
 }

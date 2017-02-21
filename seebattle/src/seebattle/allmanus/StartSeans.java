@@ -4,32 +4,29 @@ import seebattle.GameManager;
 
 public class StartSeans {
 
-	public void startSeans() throws java.io.IOException {
-		chooseType();
+	public void startSeans(int type) throws java.io.IOException {
 		GameManager gm = new GameManager();
-		char type;
 
 		do {
-			type = (char) System.in.read();
 			switch (type) {
 
-			case '1':
+			case 1:
 				gm.gameCompVsComp();
 				break;
-			case '2':
+			case 2:
 				gm.gameCompVsHuman();
 				break;
-			case '3':
+			case 3:
 				gm.gameHumanVsHuman();
 				break;
 			}
-		} while (!((type == '1') || (type == '2') || (type == '3')));
+		} while (!((type == 1) || (type == 2) || (type == 3)));
 
 		gm.initGameData();
 		gm.naabordaj();
 		gm.statistics();
 		
-		playAgain();
+		toMainMenu();
 		do {
 			int tp = System.in.read();
 			switch (tp) {
@@ -45,19 +42,9 @@ public class StartSeans {
 		} while (!((type == 1) ||(type == 2)));
 	}
 	
-	public void chooseType() {
-		System.out.println("Please,enter what type of game you want to play.");
-		System.out.println("1 - comp vs comp");
-		System.out.println("2 - comp vs human");
-		System.out.println("3 - human vs human");
-	}
-
-	public void playAgain() {
+	public void toMainMenu() {
 		System.out.println();
-		System.out.println("Do You want to play again?");
-		System.out.println("1 - new game.");
-		System.out.println();
-		System.out.println("2 - exit game.");
+		System.out.println("Press enter for back to Main Menu");
 	}
 
 }

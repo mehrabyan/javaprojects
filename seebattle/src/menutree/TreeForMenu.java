@@ -2,6 +2,8 @@ package menutree;
 
 import java.util.Scanner;
 
+import seebattle.allmanus.StartSeans;
+
 public class TreeForMenu extends Tree<String> {
 
 	public Node<String> currentNode, node;
@@ -24,54 +26,45 @@ public class TreeForMenu extends Tree<String> {
 		}
 		return isValid;
 	}
-
+	
 	public void generateMenuForGame() throws Exception {
 		TreeForMenu tfm = new TreeForMenu();
-		NodesForMenu nfm = new NodesForMenu();
+		NodesForTree nfm = new NodesForTree();
 		Scanner scan = new Scanner(System.in);
-		Scanner ss = new Scanner(System.in);
+//		Scanner ss = new Scanner(System.in);
 
 		tfm = nfm.generateMenuNodes();
 		currentNode = tfm.getRootNode();
-
+		System.out.println("Always enter 0 for back");
 		for (Integer i : currentNode.getChildren().keySet()) {
 			System.out.println(i + ". " + currentNode.getChildNode(i).getContent());
 		}
-
-//		String text;
 		do {
-
 			int j = scan.nextInt();
-			if (j == 0) {
-				if (currentNode.hasParent()) {
-					for (Integer k : currentNode.getParent().getChildren().keySet())
-						System.out.println(k + ". " + currentNode.getParent().getChildNode(k).getContent());
-					currentNode = currentNode.getParent();
-				} else
-					System.out.println("You are in root");
-			} else {
-				if (currentNode.isLeaf()) {
-					System.out.println("You are in lowest level"); // run methods
-					}
-				else {
-					if (j > currentNode.getChildren().keySet().size())
-						System.out.println("Enter correct number");
-					else {
-							currentNode = currentNode.getChildNode(j);
-							for (Integer m : currentNode.getChildren().keySet())
-								System.out.println(m + ". " + currentNode.getChildNode(m).getContent());
-							}
+			 if (j > currentNode.getChildren().keySet().size())
+			 System.out.println("Enter correct number");
+			 else {
+				 if (j == 0) {
+					 if (currentNode.hasParent()) {
+						 currentNode = currentNode.getParent();
+						 for (Integer k : currentNode.getChildren().keySet())
+							 System.out.println(k + ". " + currentNode.getChildNode(k).getContent());
+					 	} else
+					 		System.out.println("You are in root");
+				 	} else {
+				 		currentNode = currentNode.getChildNode(j);
+				 			if (!(currentNode.isTerminalNode())) {
+				 				for (Integer m : currentNode.getChildren().keySet())
+				 					System.out.println(m + ". " + currentNode.getChildNode(m).getContent());
+				 				} else {
+				 					System.out.println("Your choice - " + j);
+//				 					difUserChoice(currentNode.getContent());	// Write for all purpose
+				 					StartSeans ss = new StartSeans();		  	//	not only startSeans
+				 					ss.startSeans(j);						  	//	
 				}
 			  }
-			} while (true); //((text = ss.nextLine()) != "quit");
-//		 scan.close();
-//		 ss.close();
-//		 System.exit(0);
-	}
-
-	public static void main(String[] args) throws Exception {
-		TreeForMenu tfm = new TreeForMenu();
-
-		tfm.generateMenuForGame();
+			}
+			 
+		} while (true); 
 	}
 }
