@@ -1,5 +1,6 @@
 package menutree;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import seebattle.allmanus.StartSeans;
@@ -29,11 +30,11 @@ public class TreeForMenu extends Tree<String> {
 	
 	public void generateMenuForGame() throws Exception {
 		TreeForMenu tfm = new TreeForMenu();
-		NodesForTree nfm = new NodesForTree();
+		NodesForTree nft = new NodesForTree();
 		Scanner scan = new Scanner(System.in);
 //		Scanner ss = new Scanner(System.in);
 
-		tfm = nfm.generateMenuNodes();
+		tfm = nft.generateMenuNodes();
 		currentNode = tfm.getRootNode();
 		System.out.println("Always enter 0 for back");
 		for (Integer i : currentNode.getChildren().keySet()) {
@@ -57,14 +58,40 @@ public class TreeForMenu extends Tree<String> {
 				 				for (Integer m : currentNode.getChildren().keySet())
 				 					System.out.println(m + ". " + currentNode.getChildNode(m).getContent());
 				 				} else {
-				 					System.out.println("Your choice - " + j);
-//				 					difUserChoice(currentNode.getContent());	// Write for all purpose
-				 					StartSeans ss = new StartSeans();		  	//	not only startSeans
-				 					ss.startSeans(j);						  	//	
+				 					int i = 0;
+				 					String[] nodeContent = {"a","b","c"};
+				 					do {
+				 						nodeContent[i] = currentNode.getContent();
+				 						currentNode = currentNode.getParent();
+				 						i++;
+				 					} while (currentNode.hasParent());
+				 					defUserChoice(nodeContent);	// Write for all purpose
+//				 					StartSeans ss = new StartSeans();		  	//	not only startSeans
+//				 					ss.startSeans(j);						  	//	
 				}
 			  }
 			}
 			 
 		} while (true); 
+	}
+	
+	public String[] defUserChoice(String[] content) throws Exception {
+//		for(int k = 0; k < content.length; k++)
+//				System.out.println(content[k]);
+//		define all nesessery methods
+		do {
+		switch (content[1]) {
+		case "New game" :
+			StartSeans ss = new StartSeans();		  	//	not only startSeans
+				ss.startSeans(content[0]);
+				break;
+		case "Exit" :
+			StartSeans ex = new StartSeans();
+			ex.exitGame(content[0]);
+			break;
+		}
+		
+		return content;
+		} while(true);
 	}
 }

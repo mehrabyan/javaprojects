@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import seebattle.fieldsandships.Coordinate;
-import seebattle.fieldsandships.NewSetShips;
+import seebattle.fieldsandships.SetShips;
 import seebattle.fieldsandships.ShipsField;
 import seebattle.fieldsandships.ShotResult;
 import seebattle.player.CompPlayer;
@@ -12,7 +12,7 @@ import seebattle.player.HumanPlayer;
 import seebattle.player.Player;
 
 public class GameManager {
-	NewSetShips newSetShips = new NewSetShips();
+	SetShips sets = new SetShips();
 	Player player1, player2, currentPlayer;
 	ShipsField shipsField1, shipsField2, currentShipsField;
 
@@ -22,6 +22,17 @@ public class GameManager {
 		shipsField2 = new ShipsField();
 		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsField1.sizeOfEmptyFields());
 	}
+	
+	private void setShips() {
+		sets.correctDislocation(shipsField1);
+		shipsField1.removeShipsCoordFromEmptyFields();
+		System.out.println(
+				"The size of emptyFields after ships location on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
+		sets.correctDislocation(shipsField2);
+		shipsField2.removeShipsCoordFromEmptyFields();
+		System.out.println(
+				"The size of emptyFields after ships location on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
+}
 
 	public void gameCompVsComp() {
 		player1 = new CompPlayer("Player1");
@@ -52,17 +63,6 @@ public class GameManager {
 			currentShipsField = shipsField2;
 		}
 	}
-
-	private void setShips() {
-		newSetShips.allocetShip(shipsField1);
-		shipsField1.removeShipsCoordFromEmptyFields();
-		System.out.println(
-				"The size of emptyFields after ships seting on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
-		newSetShips.allocetShip(shipsField2);
-		shipsField2.removeShipsCoordFromEmptyFields();
-		System.out.println(
-				"The size of emptyFields after ships seting on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
-}
 
 	public void initGameData() {
 		initCurrentPlayer();

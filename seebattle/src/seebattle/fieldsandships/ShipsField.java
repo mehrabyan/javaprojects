@@ -8,7 +8,6 @@ public class ShipsField {
 	private List<Ship> ships = new ArrayList<Ship>();
 	private List<Ship> deadShips = new ArrayList<Ship>();
 	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
-//	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
 	// private Iterator<Coordinate> it = emptyFields.iterator();
 
 	public ShipsField() {
@@ -21,9 +20,24 @@ public class ShipsField {
 			}
 		}
 	}
+	
+	public List<Coordinate> getEmptyFields() {
+		return this.emptyFields;
+	}
 
 	public List<Ship> getShips() {
 		return ships;
+	}
+	
+	public int unmarkedCellsNumber() {
+		int number = 0;
+		for(int i = 1; i < 9; i++) {
+			for(int j = 1; j < 9; j++) {
+			if (!(getCoordFromEmptyFields(i,j).isMarked()))
+			number++;
+			}
+		}
+		return number;
 	}
 	
 	public Coordinate getCoordFromEmptyFields(int x, int y) {
@@ -184,25 +198,19 @@ public class ShipsField {
 
 	public void showFields() {
 		char[][] mass = new char[10][10];
-		for (int t = 0; t < 10; t++) {
-			for (int r = 0; r < 10; r++)
-				mass[t][r] = ' ';
-		}
-
 		for (Coordinate c : emptyFields) {
 			if (c.isMarked()) {
-				int s = c.getX();
-				int d = c.getY();
-				mass[s][d] = ' ';
+			int i = c.getX();
+			int j = c.getY();
+				mass[i][j] = ' ';
 			}
-		}
-
-		for (Ship sh : ships) {
+	}
+		for(Ship sh : ships) {
 			for (Coordinate c : sh.getBlocks()) {
 				int i = c.getX();
 				int j = c.getY();
-				mass[i][j] = 'O';
-			}
+					mass[i][j] = 'X';
+		}
 		}
 		for (int t = 0; t < 10; t++) {
 			for (int r = 0; r < 10; r++) {
@@ -214,7 +222,7 @@ public class ShipsField {
 	}
 
 	public Coordinate PlaceFor1MotShip() {
-		Coordinate c = null;
+		Coordinate c = null ;
 		boolean validPlace = false;
 		while (!validPlace) {
 			int x = rd1.nextInt(8) + 1;
@@ -252,7 +260,7 @@ public class ShipsField {
 		return c;
 	}
 
-	public Coordinate PlaseForShipV(int mot) {
+	public Coordinate PlaseForShipV(int mot) { // join 2 method
 		boolean validPlace = false;
 		Coordinate c1 = null;
 		while (!validPlace) {

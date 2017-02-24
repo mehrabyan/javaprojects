@@ -4,47 +4,45 @@ import seebattle.GameManager;
 
 public class StartSeans {
 
-	public void startSeans(int type) throws java.io.IOException {
+	public void startSeans(String st) throws java.io.IOException {
 		GameManager gm = new GameManager();
+			
+			switch (st) {
 
-		do {
-			switch (type) {
-
-			case 1:
+			case "Comp vs Comp":
 				gm.gameCompVsComp();
 				break;
-			case 2:
+			case "Comp vs Human":
 				gm.gameCompVsHuman();
 				break;
-			case 3:
+			case "Human vs Human":
 				gm.gameHumanVsHuman();
 				break;
 			}
-		} while (!((type == 1) || (type == 2) || (type == 3)));
 
 		gm.initGameData();
 		gm.naabordaj();
 		gm.statistics();
 		
-		toMainMenu();
-		do {
-			int tp = System.in.read();
-			switch (tp) {
-			
-			case '1':
-				Terminal tm = new Terminal();
-				tm.mainChoose();
+//		toMainMenu();
+//			int tp = System.in.read();
+//			switch (tp) {
+//			
+//			case '1':
+//				Terminal tm = new Terminal();
+//				tm.mainChoose();
 //				chooseType();
-				break;
-			case '2':
-				System.exit(0);
+//				break;
+//			case '2':
+//				System.exit(0);
 			}
-		} while (!((type == 1) ||(type == 2)));
+	
+	public void exitGame(String ex) {
+		System.exit(0);
 	}
 	
 	public void toMainMenu() {
 		System.out.println();
 		System.out.println("Press enter for back to Main Menu");
 	}
-
 }
