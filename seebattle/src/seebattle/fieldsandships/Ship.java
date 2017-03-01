@@ -42,30 +42,6 @@ public class Ship {
 		return blocks.size();
 	}
 	
-	public Coordinate shipUpperCornerLeft() {
-		c = this.getBlocks().get(0);
-		c = c.upperCornerLeft();
-		return c;
-	}
-	
-	public Coordinate shipUpperCornerRight() {
-		c = this.getBlocks().get(motors - 1);
-		c = c.upperCornerRight();
-		return c;
-	}
-	
-	public Coordinate shipLowerCornerLeft() {
-		c = this.getBlocks().get(0);
-		c = c.lowerCornerLeft();
-		return c;
-	}
-	
-	public Coordinate shipLowerCornerRight() {
-		c = this.getBlocks().get(motors - 1);
-		c = c.lowerCornerRight();
-		return c;
-	}
-
 	public ShotResult processShot(Coordinate c) {
 		if (blocks.contains(c)) {
 			blocks.remove(c);

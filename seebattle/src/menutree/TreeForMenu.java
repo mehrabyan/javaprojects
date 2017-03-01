@@ -3,6 +3,7 @@ package menutree;
 import java.io.IOException;
 import java.util.Scanner;
 
+import gameio.IOGames;
 import seebattle.allmanus.StartSeans;
 
 public class TreeForMenu extends Tree<String> {
@@ -28,6 +29,7 @@ public class TreeForMenu extends Tree<String> {
 		return isValid;
 	}
 	
+	@SuppressWarnings("null")
 	public void generateMenuForGame() throws Exception {
 		TreeForMenu tfm = new TreeForMenu();
 		NodesForTree nft = new NodesForTree();
@@ -59,15 +61,14 @@ public class TreeForMenu extends Tree<String> {
 				 					System.out.println(m + ". " + currentNode.getChildNode(m).getContent());
 				 				} else {
 				 					int i = 0;
-				 					String[] nodeContent = {"a","b","c"};
+				 					String[] nodeContent = new String[3];
 				 					do {
+				 						
 				 						nodeContent[i] = currentNode.getContent();
 				 						currentNode = currentNode.getParent();
 				 						i++;
 				 					} while (currentNode.hasParent());
 				 					defUserChoice(nodeContent);	// Write for all purpose
-//				 					StartSeans ss = new StartSeans();		  	//	not only startSeans
-//				 					ss.startSeans(j);						  	//	
 				}
 			  }
 			}
@@ -80,16 +81,21 @@ public class TreeForMenu extends Tree<String> {
 //				System.out.println(content[k]);
 //		define all nesessery methods
 		do {
-		switch (content[1]) {
-		case "New game" :
-			StartSeans ss = new StartSeans();		  	//	not only startSeans
+			switch (content[1]) {
+			
+			case "New game":
+				StartSeans ss = new StartSeans(); // not only startSeans
 				ss.startSeans(content[0]);
 				break;
-		case "Exit" :
-			StartSeans ex = new StartSeans();
-			ex.exitGame(content[0]);
-			break;
-		}
+				
+			case "Save game":
+				IOGames iog = new IOGames();
+				iog.saveGame(content[0]);
+				break;
+				
+			case "Exit":
+				System.exit(0);
+			}
 		
 		return content;
 		} while(true);

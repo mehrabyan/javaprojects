@@ -139,22 +139,19 @@ public class ShipsField {
 	public List<Ship> showDeadShips() {
 		return deadShips;
 	}
-
-	@Override
-	public String toString() {
-		return " [ships=" + ships + "\n" + "]";
-	}
+	
+//	@Override
+//	public String toString() {
+//		return " [ships=" + ships + "\n" + "]";
+//	}
 
 	public List<Coordinate> showEmptyFields() {
 		return emptyFields;
 	}
 
-	public void setShip1Mot() {
+	public void set1MotShip() {
 		Ship ship = new Ship();
 		c = PlaceFor1MotShip();
-		int x = c.getX();
-		int y = c.getY();
-		c = new Coordinate(x, y);
 		ship.addToBlocks(c);
 		ship.setMotors(1);
 		// mark ship environment
@@ -162,15 +159,12 @@ public class ShipsField {
 		addToListShips(new Ship(ship.getBlocks()));
 	}
 
-	public void SetShipH(int mot) {
+	public void set4MotShipH(int mot) {
 		Ship ship = new Ship();
-		c = PlaceForShipH(mot);
-		int x = c.getX();
-		int y = c.getY();
-		c = new Coordinate(x, y);
-		for (int k = 0; k < mot; k++) {
-			ship.addToBlocks(c);
-			c = c.nextInRow();
+		c =PlaceFor4MotShipH(mot);
+		for (int k = 0; k < mot; k++) { // reseive coord array from PlaceFor4MotShipH 
+			ship.addToBlocks(c);		//
+			c = getNextCoordInRowFromEmptyFields(c); // 
 		}
 		ship.setMotors(mot);
 		// mark ship environment
@@ -179,15 +173,41 @@ public class ShipsField {
 
 	}
 
-	public void SetShipV(int mot) {
+	public void set4MotShipV(int mot) {
 		Ship ship = new Ship();
-		c = PlaseForShipV(mot);
-		int x = c.getX();
-		int y = c.getY();
-		c = new Coordinate(x, y);
+		c = PlaceFor4MotShipV(mot);
+		for (int k = 0; k < mot; k++) { // reseive coord array from PlaceFor4MotShipH
+			ship.addToBlocks(c);
+			c = getNextCoordInColmFromEmptyFields(c);
+		}
+		ship.setMotors(mot);
+		// mark ship environment
+		setShipsEnvironmentMarkers(ship);
+		addToListShips(new Ship(ship.getBlocks()));
+
+	}
+
+	
+	public void setShipH(int mot) {
+		Ship ship = new Ship();
+		c =PlaceForShipH(mot);
 		for (int k = 0; k < mot; k++) {
 			ship.addToBlocks(c);
-			c = c.nextInColm();
+			c = getNextCoordInRowFromEmptyFields(c);
+		}
+		ship.setMotors(mot);
+		// mark ship environment
+		setShipsEnvironmentMarkers(ship);
+		addToListShips(new Ship(ship.getBlocks()));
+
+	}
+
+	public void setShipV(int mot) {
+		Ship ship = new Ship();
+		c = PlaceForShipV(mot);
+		for (int k = 0; k < mot; k++) {
+			ship.addToBlocks(c);
+			c = getNextCoordInColmFromEmptyFields(c);
 		}
 		ship.setMotors(mot);
 		// mark ship environment
@@ -234,6 +254,65 @@ public class ShipsField {
 		return c;
 	}
 
+	public Coordinate PlaceFor4MotShipH(int mot) {
+		boolean validPlace = false;
+		Coordinate c1 = null;
+		while (!validPlace) {
+			int z = rd1.nextInt(3);
+			if(z % 2 == 0) {
+				z ++ ;
+			}
+			int x = z;
+			int d = rd1.nextInt(5);
+			if(d % 2 == 0) {
+				d ++ ;
+			}
+			int y = d;
+			c = getCoordFromEmptyFields(x, y);
+			c1 = c;
+			for (int a = 1; a < mot; a++) {
+				if (c1.isMarked()) {
+					break;
+				} else {
+						c1 = getNextCoordInRowFromEmptyFields(c1);
+				}
+				if ((a == mot - 1) && !(c1.isMarked()))
+					validPlace = true;
+			}
+		}
+		System.out.println("Returned coordinate c is :" + c);
+		return c;
+	}
+	
+	public Coordinate PlaceFor4MotShipV(int mot) {
+		boolean validPlace = false;
+		Coordinate c1 = null;
+		while (!validPlace) {
+			int d = rd1.nextInt(5);
+			if(d % 2 == 0) {
+				d ++ ;
+			}
+			int x = d;
+			int z = rd1.nextInt(3);
+			if(z % 2 == 0) {
+				z ++ ;
+			}
+			int y = z;
+			c = getCoordFromEmptyFields(x, y);
+			c1 = c;
+			for (int a = 1; a < mot; a++) {
+				if (c1.isMarked()) {
+					break;
+				} else {
+						c1 = getNextCoordInColmFromEmptyFields(c1);
+				}
+				if ((a == mot - 1) && !(c1.isMarked()))
+					validPlace = true;
+			}
+		}
+		return c;
+	}
+	
 	public Coordinate PlaceForShipH(int mot) {
 		boolean validPlace = false;
 		Coordinate c1 = null;
@@ -260,7 +339,7 @@ public class ShipsField {
 		return c;
 	}
 
-	public Coordinate PlaseForShipV(int mot) { // join 2 method
+	public Coordinate PlaceForShipV(int mot) { // join 2 method
 		boolean validPlace = false;
 		Coordinate c1 = null;
 		while (!validPlace) {

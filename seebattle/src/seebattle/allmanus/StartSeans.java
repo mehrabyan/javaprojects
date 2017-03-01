@@ -24,25 +24,6 @@ public class StartSeans {
 		gm.naabordaj();
 		gm.statistics();
 		
-//		toMainMenu();
-//			int tp = System.in.read();
-//			switch (tp) {
-//			
-//			case '1':
-//				Terminal tm = new Terminal();
-//				tm.mainChoose();
-//				chooseType();
-//				break;
-//			case '2':
-//				System.exit(0);
 			}
-	
-	public void exitGame(String ex) {
-		System.exit(0);
-	}
-	
-	public void toMainMenu() {
-		System.out.println();
-		System.out.println("Press enter for back to Main Menu");
-	}
+
 }
