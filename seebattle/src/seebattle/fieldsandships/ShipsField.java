@@ -149,19 +149,9 @@ public class ShipsField {
 		return emptyFields;
 	}
 
-	public void set1MotShip() {
+	public void setBigMotShipH(int mot) {
 		Ship ship = new Ship();
-		c = PlaceFor1MotShip();
-		ship.addToBlocks(c);
-		ship.setMotors(1);
-		// mark ship environment
-		setShipsEnvironmentMarkers(ship);
-		addToListShips(new Ship(ship.getBlocks()));
-	}
-
-	public void set4MotShipH(int mot) {
-		Ship ship = new Ship();
-		c =PlaceFor4MotShipH(mot);
+		c =PlaceForBigMotShipH(mot);
 		for (int k = 0; k < mot; k++) { // reseive coord array from PlaceFor4MotShipH 
 			ship.addToBlocks(c);		//
 			c = getNextCoordInRowFromEmptyFields(c); // 
@@ -170,12 +160,11 @@ public class ShipsField {
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
-
 	}
 
-	public void set4MotShipV(int mot) {
+	public void setBigMotShipV(int mot) {
 		Ship ship = new Ship();
-		c = PlaceFor4MotShipV(mot);
+		c = PlaceForBigMotShipV(mot);
 		for (int k = 0; k < mot; k++) { // reseive coord array from PlaceFor4MotShipH
 			ship.addToBlocks(c);
 			c = getNextCoordInColmFromEmptyFields(c);
@@ -184,13 +173,11 @@ public class ShipsField {
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
-
 	}
-
 	
-	public void setShipH(int mot) {
+	public void set2MotShipH(int mot) {
 		Ship ship = new Ship();
-		c =PlaceForShipH(mot);
+		c =PlaceFor2MotShipH(mot);
 		for (int k = 0; k < mot; k++) {
 			ship.addToBlocks(c);
 			c = getNextCoordInRowFromEmptyFields(c);
@@ -199,12 +186,11 @@ public class ShipsField {
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
-
 	}
 
-	public void setShipV(int mot) {
+	public void set2MotShipV(int mot) {
 		Ship ship = new Ship();
-		c = PlaceForShipV(mot);
+		c = PlaceFor2MotShipV(mot);
 		for (int k = 0; k < mot; k++) {
 			ship.addToBlocks(c);
 			c = getNextCoordInColmFromEmptyFields(c);
@@ -213,7 +199,16 @@ public class ShipsField {
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
-
+	}
+	
+	public void set1MotShip() {
+		Ship ship = new Ship();
+		c = PlaceFor1MotShip();
+		ship.addToBlocks(c);
+		ship.setMotors(1);
+		// mark ship environment
+		setShipsEnvironmentMarkers(ship);
+		addToListShips(new Ship(ship.getBlocks()));
 	}
 
 	public void showFields() {
@@ -241,24 +236,11 @@ public class ShipsField {
 		System.out.println(toString());
 	}
 
-	public Coordinate PlaceFor1MotShip() {
-		Coordinate c = null ;
-		boolean validPlace = false;
-		while (!validPlace) {
-			int x = rd1.nextInt(8) + 1;
-			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromEmptyFields(x, y);
-			if (!(c.isMarked()))
-				validPlace = true;
-		}
-		return c;
-	}
-
-	public Coordinate PlaceFor4MotShipH(int mot) {
+	public Coordinate PlaceForBigMotShipH(int mot) {
 		boolean validPlace = false;
 		Coordinate c1 = null;
 		while (!validPlace) {
-			int z = rd1.nextInt(3);
+			int z = rd1.nextInt(5);
 			if(z % 2 == 0) {
 				z ++ ;
 			}
@@ -280,11 +262,10 @@ public class ShipsField {
 					validPlace = true;
 			}
 		}
-		System.out.println("Returned coordinate c is :" + c);
 		return c;
 	}
 	
-	public Coordinate PlaceFor4MotShipV(int mot) {
+	public Coordinate PlaceForBigMotShipV(int mot) {
 		boolean validPlace = false;
 		Coordinate c1 = null;
 		while (!validPlace) {
@@ -293,7 +274,7 @@ public class ShipsField {
 				d ++ ;
 			}
 			int x = d;
-			int z = rd1.nextInt(3);
+			int z = rd1.nextInt(5);
 			if(z % 2 == 0) {
 				z ++ ;
 			}
@@ -313,7 +294,7 @@ public class ShipsField {
 		return c;
 	}
 	
-	public Coordinate PlaceForShipH(int mot) {
+	public Coordinate PlaceFor2MotShipH(int mot) {
 		boolean validPlace = false;
 		Coordinate c1 = null;
 		while (!validPlace) {
@@ -339,7 +320,7 @@ public class ShipsField {
 		return c;
 	}
 
-	public Coordinate PlaceForShipV(int mot) { // join 2 method
+	public Coordinate PlaceFor2MotShipV(int mot) { // join 2 method
 		boolean validPlace = false;
 		Coordinate c1 = null;
 		while (!validPlace) {
@@ -362,6 +343,19 @@ public class ShipsField {
 		}
 		if (c.getX() >= c1.getX())
 			c = c1;
+		return c;
+	}
+	
+	public Coordinate PlaceFor1MotShip() {
+		Coordinate c = null ;
+		boolean validPlace = false;
+		while (!validPlace) {
+			int x = rd1.nextInt(8) + 1;
+			int y = rd1.nextInt(8) + 1;
+			c = getCoordFromEmptyFields(x, y);
+			if (!(c.isMarked()))
+				validPlace = true;
+		}
 		return c;
 	}
 

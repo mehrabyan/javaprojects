@@ -24,11 +24,11 @@ public class GameManager {
 	}
 	
 	private void setShips() {
-		sets.correctDislocation(shipsField1);
+		sets.locateShips(shipsField1);
 		shipsField1.removeShipsCoordFromEmptyFields();
 		System.out.println(
 				"The size of emptyFields after ships location on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
-		sets.correctDislocation(shipsField2);
+		sets.locateShips(shipsField2);
 		shipsField2.removeShipsCoordFromEmptyFields();
 		System.out.println(
 				"The size of emptyFields after ships location on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());
