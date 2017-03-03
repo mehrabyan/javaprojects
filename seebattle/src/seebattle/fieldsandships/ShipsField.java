@@ -149,203 +149,181 @@ public class ShipsField {
 		return emptyFields;
 	}
 
-	public void setBigMotShipH(int mot) {
+	public void set4MotShip(int mot) {
 		Ship ship = new Ship();
-		c =PlaceForBigMotShipH(mot);
-		for (int k = 0; k < mot; k++) { // reseive coord array from PlaceFor4MotShipH 
-			ship.addToBlocks(c);		//
-			c = getNextCoordInRowFromEmptyFields(c); // 
+		for (Coordinate c : PlaceFor4MotShip(mot)) {  
+			ship.addToBlocks(c);		
 		}
 		ship.setMotors(mot);
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
-	}
-
-	public void setBigMotShipV(int mot) {
-		Ship ship = new Ship();
-		c = PlaceForBigMotShipV(mot);
-		for (int k = 0; k < mot; k++) { // reseive coord array from PlaceFor4MotShipH
-			ship.addToBlocks(c);
-			c = getNextCoordInColmFromEmptyFields(c);
-		}
-		ship.setMotors(mot);
-		// mark ship environment
-		setShipsEnvironmentMarkers(ship);
-		addToListShips(new Ship(ship.getBlocks()));
+		System.out.println(ship.toString());
 	}
 	
-	public void set2MotShipH(int mot) {
-		Ship ship = new Ship();
-		c =PlaceFor2MotShipH(mot);
-		for (int k = 0; k < mot; k++) {
-			ship.addToBlocks(c);
-			c = getNextCoordInRowFromEmptyFields(c);
+	public List<Coordinate> PlaceFor4MotShip(int mot) {
+		List<Coordinate> lc = new ArrayList<Coordinate>();
+		int dir = rd1.nextInt(2);
+		boolean validPlace = false;
+		while (!validPlace) {
+
+			int x = rd1.nextInt(5);
+			if (x % 2 == 0) {
+				x++;
+			}
+			int y = rd1.nextInt(5);
+			if (y % 2 == 0) {
+				y++;
+			}
+			c = getCoordFromEmptyFields(x, y);
+			
+			for (int i = 0; i < mot; i++) {
+				if (c.isMarked()) {
+					lc.removeAll(lc);
+					break;
+				} else {
+					lc.add(c);
+
+					switch (dir) {
+					case 0:
+						c = getNextCoordInRowFromEmptyFields(c);
+						break;
+
+					case 1:
+						c = getNextCoordInColmFromEmptyFields(c);
+						break;
+					}
+				}
+				if (i == mot - 1) { 
+					validPlace = true;
+				}
+			}
 		}
-		ship.setMotors(mot);
-		// mark ship environment
-		setShipsEnvironmentMarkers(ship);
-		addToListShips(new Ship(ship.getBlocks()));
+		return lc;
 	}
 
-	public void set2MotShipV(int mot) {
+	
+	public void set3MotShip(int mot) {
 		Ship ship = new Ship();
-		c = PlaceFor2MotShipV(mot);
-		for (int k = 0; k < mot; k++) {
-			ship.addToBlocks(c);
-			c = getNextCoordInColmFromEmptyFields(c);
+		for (Coordinate c : PlaceFor3MotShip(mot)) {  
+			ship.addToBlocks(c);		
 		}
 		ship.setMotors(mot);
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
+		System.out.println(ship.toString());
 	}
 	
-	public void set1MotShip() {
+	public List<Coordinate> PlaceFor3MotShip(int mot) {
+		List<Coordinate> lc = new ArrayList<Coordinate>();
+		int x = 0, y = 0;
+		int dir = rd1.nextInt(2);
+		boolean validPlace = false;
+		while (!validPlace) {
+			
+			switch (dir) {
+			case 0 :
+					x = rd1.nextInt(5) + 1;
+					if(x % 2 == 0)
+					x++;
+					y = rd1.nextInt(6) + 1;
+					break;
+			case 1 :
+					x = rd1.nextInt(6) + 1;
+					y = rd1.nextInt(5) + 1;
+					if(y % 2 == 0)
+					y++;
+					break;
+			}
+			c = getCoordFromEmptyFields(x, y);
+			
+			for (int i = 0; i < mot; i++) {
+				if (c.isMarked()) {
+					lc.removeAll(lc);
+					break;
+				} else {
+					lc.add(c);
+
+					switch (dir) {
+					case 0:
+						c = getNextCoordInRowFromEmptyFields(c);
+						break;
+
+					case 1:
+						c = getNextCoordInColmFromEmptyFields(c);
+						break;
+					}
+				}
+				if (i == mot - 1) { //&& !(c.isMarked())) {
+					validPlace = true;
+				}
+			}
+		}
+		return lc;
+	}
+
+
+	public void set2MotShip(int mot) {
+		Ship ship = new Ship();
+		for (Coordinate c : PlaceFor2MotShip(mot)) {
+			ship.addToBlocks(c);
+		}
+		ship.setMotors(mot);
+		// mark ship environment
+		setShipsEnvironmentMarkers(ship);
+		addToListShips(new Ship(ship.getBlocks()));
+		System.out.println(ship.toString());
+	}
+	
+	public List<Coordinate> PlaceFor2MotShip(int mot) {
+		List<Coordinate> lc = new ArrayList<Coordinate>();
+		int dir = rd1.nextInt(2);
+		boolean validPlace = false;
+		while (!validPlace) {
+			int x = rd1.nextInt(7) + 1;
+			int y = rd1.nextInt(7) + 1;
+			c = getCoordFromEmptyFields(x, y);
+			
+			if((c.isMarked())) 
+				lc.removeAll(lc);
+			else {
+				lc.add(c);
+				switch (dir) {
+				
+				case 0 :
+					c = getNextCoordInRowFromEmptyFields(c);
+					break;
+					
+				case 1 :
+					c = getNextCoordInColmFromEmptyFields(c);
+					break;
+				}
+				if((c.isMarked())) 
+				lc.removeAll(lc);
+				else {
+					lc.add(c);
+					validPlace = true;
+				}
+		   }
+		}
+		return lc;
+	}
+
+
+	public void set1MotShip(int mot) {
 		Ship ship = new Ship();
 		c = PlaceFor1MotShip();
 		ship.addToBlocks(c);
-		ship.setMotors(1);
+		ship.setMotors(mot);
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
 	}
 
-	public void showFields() {
-		char[][] mass = new char[10][10];
-		for (Coordinate c : emptyFields) {
-			if (c.isMarked()) {
-			int i = c.getX();
-			int j = c.getY();
-				mass[i][j] = ' ';
-			}
-	}
-		for(Ship sh : ships) {
-			for (Coordinate c : sh.getBlocks()) {
-				int i = c.getX();
-				int j = c.getY();
-					mass[i][j] = 'X';
-		}
-		}
-		for (int t = 0; t < 10; t++) {
-			for (int r = 0; r < 10; r++) {
-				System.out.print(Arrays.asList(mass[t][r]));
-			}
-			System.out.println();
-		}
-		System.out.println(toString());
-	}
+		
+	
 
-	public Coordinate PlaceForBigMotShipH(int mot) {
-		boolean validPlace = false;
-		Coordinate c1 = null;
-		while (!validPlace) {
-			int z = rd1.nextInt(5);
-			if(z % 2 == 0) {
-				z ++ ;
-			}
-			int x = z;
-			int d = rd1.nextInt(5);
-			if(d % 2 == 0) {
-				d ++ ;
-			}
-			int y = d;
-			c = getCoordFromEmptyFields(x, y);
-			c1 = c;
-			for (int a = 1; a < mot; a++) {
-				if (c1.isMarked()) {
-					break;
-				} else {
-						c1 = getNextCoordInRowFromEmptyFields(c1);
-				}
-				if ((a == mot - 1) && !(c1.isMarked()))
-					validPlace = true;
-			}
-		}
-		return c;
-	}
-	
-	public Coordinate PlaceForBigMotShipV(int mot) {
-		boolean validPlace = false;
-		Coordinate c1 = null;
-		while (!validPlace) {
-			int d = rd1.nextInt(5);
-			if(d % 2 == 0) {
-				d ++ ;
-			}
-			int x = d;
-			int z = rd1.nextInt(5);
-			if(z % 2 == 0) {
-				z ++ ;
-			}
-			int y = z;
-			c = getCoordFromEmptyFields(x, y);
-			c1 = c;
-			for (int a = 1; a < mot; a++) {
-				if (c1.isMarked()) {
-					break;
-				} else {
-						c1 = getNextCoordInColmFromEmptyFields(c1);
-				}
-				if ((a == mot - 1) && !(c1.isMarked()))
-					validPlace = true;
-			}
-		}
-		return c;
-	}
-	
-	public Coordinate PlaceFor2MotShipH(int mot) {
-		boolean validPlace = false;
-		Coordinate c1 = null;
-		while (!validPlace) {
-			int x = rd1.nextInt(8) + 1;
-			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromEmptyFields(x, y);
-			c1 = c;
-			for (int a = 1; a < mot; a++) {
-				if (c1.isMarked()) {
-					break;
-				} else {
-					if (c.getY() + mot <= 9)
-						c1 = getNextCoordInRowFromEmptyFields(c1);
-					else
-						c1 = getPreviousCoordInRowFromEmptyFields(c1);
-				}
-				if ((a == mot - 1) && !(c1.isMarked()))
-					validPlace = true;
-			}
-		}
-		if (c.getY() >= c1.getY())
-			c = c1;
-		return c;
-	}
-
-	public Coordinate PlaceFor2MotShipV(int mot) { // join 2 method
-		boolean validPlace = false;
-		Coordinate c1 = null;
-		while (!validPlace) {
-			int x = rd1.nextInt(8) + 1;
-			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromEmptyFields(x, y);
-			c1 = c;
-			for (int a = 1; a < mot; a++) {
-				if (c1.isMarked()) {
-					break;
-				} else {
-					if (c.getX() + mot <= 9)
-						c1 = getNextCoordInColmFromEmptyFields(c1);
-					else
-						c1 = getPreviousCoordInColmFromEmptyFields(c1);
-				}
-				if ((a == mot - 1) && !(c1.isMarked()))
-					validPlace = true;
-			}
-		}
-		if (c.getX() >= c1.getX())
-			c = c1;
-		return c;
-	}
-	
 	public Coordinate PlaceFor1MotShip() {
 		Coordinate c = null ;
 		boolean validPlace = false;
@@ -384,5 +362,29 @@ public class ShipsField {
 				getCoordFromEmptyFields(x, y).setMarker('m');
 			}
 		}
+	}
+	public void showFields() {
+		char[][] mass = new char[10][10];
+		for (Coordinate c : emptyFields) {
+			if (c.isMarked()) {
+			int i = c.getX();
+			int j = c.getY();
+				mass[i][j] = 'X';
+			}
+	}
+		for(Ship sh : ships) {
+			for (Coordinate c : sh.getBlocks()) {
+				int i = c.getX();
+				int j = c.getY();
+					mass[i][j] = 'O';
+		}
+		}
+		for (int t = 0; t < 10; t++) {
+			for (int r = 0; r < 10; r++) {
+				System.out.print(Arrays.asList(mass[t][r]));
+			}
+			System.out.println();
+		}
+		System.out.println(toString());
 	}
 }
