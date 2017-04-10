@@ -3,8 +3,8 @@ package seebattle;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import allocation.SetShips;
 import seebattle.fieldsandships.Coordinate;
-import seebattle.fieldsandships.SetShips;
 import seebattle.fieldsandships.ShipsField;
 import seebattle.fieldsandships.ShotResult;
 import seebattle.player.CompPlayer;
@@ -12,23 +12,25 @@ import seebattle.player.HumanPlayer;
 import seebattle.player.Player;
 
 public class GameManager {
-	SetShips sets = new SetShips();
+	SetShips setships = new SetShips();
 	Player player1, player2, currentPlayer;
 	ShipsField shipsField1, shipsField2, currentShipsField;
 
 	public GameManager() {
 		shipsField1 = new ShipsField();
+		System.out.println();
+		System.out.println(" Start new game");
 		System.out.println("The size of emptyFields after creating shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
 		shipsField2 = new ShipsField();
 		System.out.println("The size of emptyFields after creating shipsfield2 is :" + shipsField1.sizeOfEmptyFields());
 	}
 	
 	private void setShips() {
-		sets.correctDislocation(shipsField1);
+		setships.correctLocation(shipsField1);
 		shipsField1.removeShipsCoordFromEmptyFields();
 		System.out.println(
 				"The size of emptyFields after ships location on the shipsfield1 is :" + shipsField1.sizeOfEmptyFields());
-		sets.correctDislocation(shipsField2);
+		setships.correctLocation(shipsField2);
 		shipsField2.removeShipsCoordFromEmptyFields();
 		System.out.println(
 				"The size of emptyFields after ships location on the shipsfield2 is :" + shipsField2.sizeOfEmptyFields());

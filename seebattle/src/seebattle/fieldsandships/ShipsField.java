@@ -3,12 +3,12 @@ package seebattle.fieldsandships;
 import java.util.*;
 
 public class ShipsField {
-	Random rd1 = new Random();
-	Coordinate c;
+	Random rd1 = new Random(); // remove into methods.
+	Coordinate c, currentCell;
 	private List<Ship> ships = new ArrayList<Ship>();
 	private List<Ship> deadShips = new ArrayList<Ship>();
 	private List<Coordinate> emptyFields = new ArrayList<Coordinate>();
-	// private Iterator<Coordinate> it = emptyFields.iterator();
+	private List<Coordinate> unmarkedCells = new ArrayList<Coordinate>();
 
 	public ShipsField() {
 		
@@ -29,47 +29,32 @@ public class ShipsField {
 		return ships;
 	}
 	
-	public int unmarkedCellsNumber() {
-		int number = 0;
-		for(int i = 1; i < 9; i++) {
-			for(int j = 1; j < 9; j++) {
-			if (!(getCoordFromEmptyFields(i,j).isMarked()))
-			number++;
-			}
-		}
-		return number;
-	}
-	
 	public Coordinate getCoordFromEmptyFields(int x, int y) {
-		return emptyFields.get(10 * x + y);
+		return emptyFields.get((10 * x) + y);
 	}
 
 	public Coordinate getNextCoordInRowFromEmptyFields(Coordinate c) {
-		int index = 0;
-		if (emptyFields.contains(c))
-			index = emptyFields.indexOf(c);
-		return emptyFields.get(index + 1);
+		int x = c.getX();
+		int y = c.getY();
+		return emptyFields.get((10 * x) +  y + 1);
 	}
 
 	public Coordinate getPreviousCoordInRowFromEmptyFields(Coordinate c) {
-		int index = 0;
-		if (emptyFields.contains(c))
-			index = emptyFields.indexOf(c);
-		return emptyFields.get(index - 1);
+		int x = c.getX();
+		int y = c.getY();
+		return emptyFields.get((10 * x) + y - 1);
 	}
 
 	public Coordinate getNextCoordInColmFromEmptyFields(Coordinate c) {
-		int index = 0;
-		if (emptyFields.contains(c))
-			index = emptyFields.indexOf(c);
-		return emptyFields.get(index + 10);
+		int x = c.getX();
+		int y = c.getY();
+		return emptyFields.get(10 * (x + 1) + y);
 	}
 
 	public Coordinate getPreviousCoordInColmFromEmptyFields(Coordinate c) {
-		int index = 0;
-		if (emptyFields.contains(c))
-			index = emptyFields.indexOf(c);
-		return emptyFields.get(index - 10);
+		int x = c.getX();
+		int y = c.getY();
+		return emptyFields.get(10 * (x - 1) + y);
 	}
 
 	public Coordinate getUpperLeftCoordFromEmptyFields(Coordinate c) {
@@ -149,192 +134,20 @@ public class ShipsField {
 		return emptyFields;
 	}
 
-	public void set4MotShip(int mot) {
-		Ship ship = new Ship();
-		for (Coordinate c : PlaceFor4MotShip(mot)) {  
-			ship.addToBlocks(c);		
-		}
-		ship.setMotors(mot);
-		// mark ship environment
-		setShipsEnvironmentMarkers(ship);
-		addToListShips(new Ship(ship.getBlocks()));
-		System.out.println(ship.toString());
-	}
-	
-	public List<Coordinate> PlaceFor4MotShip(int mot) {
-		List<Coordinate> lc = new ArrayList<Coordinate>();
-		int dir = rd1.nextInt(2);
-		boolean validPlace = false;
-		while (!validPlace) {
-
-			int x = rd1.nextInt(5);
-			if (x % 2 == 0) {
-				x++;
-			}
-			int y = rd1.nextInt(5);
-			if (y % 2 == 0) {
-				y++;
-			}
-			c = getCoordFromEmptyFields(x, y);
-			
-			for (int i = 0; i < mot; i++) {
-				if (c.isMarked()) {
-					lc.removeAll(lc);
-					break;
-				} else {
-					lc.add(c);
-
-					switch (dir) {
-					case 0:
-						c = getNextCoordInRowFromEmptyFields(c);
-						break;
-
-					case 1:
-						c = getNextCoordInColmFromEmptyFields(c);
-						break;
-					}
-				}
-				if (i == mot - 1) { 
-					validPlace = true;
-				}
-			}
-		}
-		return lc;
-	}
-
-	
-	public void set3MotShip(int mot) {
-		Ship ship = new Ship();
-		for (Coordinate c : PlaceFor3MotShip(mot)) {  
-			ship.addToBlocks(c);		
-		}
-		ship.setMotors(mot);
-		// mark ship environment
-		setShipsEnvironmentMarkers(ship);
-		addToListShips(new Ship(ship.getBlocks()));
-		System.out.println(ship.toString());
-	}
-	
-	public List<Coordinate> PlaceFor3MotShip(int mot) {
-		List<Coordinate> lc = new ArrayList<Coordinate>();
-		int x = 0, y = 0;
-		int dir = rd1.nextInt(2);
-		boolean validPlace = false;
-		while (!validPlace) {
-			
-			switch (dir) {
-			case 0 :
-					x = rd1.nextInt(5) + 1;
-					if(x % 2 == 0)
-					x++;
-					y = rd1.nextInt(6) + 1;
-					break;
-			case 1 :
-					x = rd1.nextInt(6) + 1;
-					y = rd1.nextInt(5) + 1;
-					if(y % 2 == 0)
-					y++;
-					break;
-			}
-			c = getCoordFromEmptyFields(x, y);
-			
-			for (int i = 0; i < mot; i++) {
-				if (c.isMarked()) {
-					lc.removeAll(lc);
-					break;
-				} else {
-					lc.add(c);
-
-					switch (dir) {
-					case 0:
-						c = getNextCoordInRowFromEmptyFields(c);
-						break;
-
-					case 1:
-						c = getNextCoordInColmFromEmptyFields(c);
-						break;
-					}
-				}
-				if (i == mot - 1) { //&& !(c.isMarked())) {
-					validPlace = true;
-				}
-			}
-		}
-		return lc;
-	}
-
-
-	public void set2MotShip(int mot) {
-		Ship ship = new Ship();
-		for (Coordinate c : PlaceFor2MotShip(mot)) {
-			ship.addToBlocks(c);
-		}
-		ship.setMotors(mot);
-		// mark ship environment
-		setShipsEnvironmentMarkers(ship);
-		addToListShips(new Ship(ship.getBlocks()));
-		System.out.println(ship.toString());
-	}
-	
-	public List<Coordinate> PlaceFor2MotShip(int mot) {
-		List<Coordinate> lc = new ArrayList<Coordinate>();
-		int dir = rd1.nextInt(2);
-		boolean validPlace = false;
-		while (!validPlace) {
-			int x = rd1.nextInt(7) + 1;
-			int y = rd1.nextInt(7) + 1;
-			c = getCoordFromEmptyFields(x, y);
-			
-			if((c.isMarked())) 
-				lc.removeAll(lc);
-			else {
-				lc.add(c);
-				switch (dir) {
-				
-				case 0 :
-					c = getNextCoordInRowFromEmptyFields(c);
-					break;
-					
-				case 1 :
-					c = getNextCoordInColmFromEmptyFields(c);
-					break;
-				}
-				if((c.isMarked())) 
-				lc.removeAll(lc);
-				else {
-					lc.add(c);
-					validPlace = true;
-				}
-		   }
-		}
-		return lc;
-	}
-
-
-	public void set1MotShip(int mot) {
+	public void set1MotShip() {
 		Ship ship = new Ship();
 		c = PlaceFor1MotShip();
 		ship.addToBlocks(c);
-		ship.setMotors(mot);
+		ship.setMotors(1);
 		// mark ship environment
 		setShipsEnvironmentMarkers(ship);
 		addToListShips(new Ship(ship.getBlocks()));
 	}
 
-		
-	
-
 	public Coordinate PlaceFor1MotShip() {
-		Coordinate c = null ;
-		boolean validPlace = false;
-		while (!validPlace) {
-			int x = rd1.nextInt(8) + 1;
-			int y = rd1.nextInt(8) + 1;
-			c = getCoordFromEmptyFields(x, y);
-			if (!(c.isMarked()))
-				validPlace = true;
-		}
-		return c;
+		setUnmarkedCells();
+			int x = rd1.nextInt(unmarkedCells.size());
+			return unmarkedCells.get(x);
 	}
 
 	public int sizeOfEmptyFields() {
@@ -386,5 +199,19 @@ public class ShipsField {
 			System.out.println();
 		}
 		System.out.println(toString());
+	}
+	
+	public List<Coordinate> getUnmarkedCells() {
+		return unmarkedCells;
+	}
+
+	public void setUnmarkedCells() {
+		unmarkedCells.removeAll(unmarkedCells);
+		for(int i = 1; i < 9; i++) {
+			for(int j = 1; j < 9; j++) {
+			if (!(getCoordFromEmptyFields(i,j).isMarked()))
+				unmarkedCells.add(getCoordFromEmptyFields(i,j));
+			}
+		}
 	}
 }

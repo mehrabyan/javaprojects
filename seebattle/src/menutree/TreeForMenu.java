@@ -1,6 +1,7 @@
 package menutree;
 
 import java.io.IOException;
+import java.util.*;
 import java.util.Scanner;
 
 import gameio.IOGames;
@@ -60,13 +61,10 @@ public class TreeForMenu extends Tree<String> {
 				 				for (Integer m : currentNode.getChildren().keySet())
 				 					System.out.println(m + ". " + currentNode.getChildNode(m).getContent());
 				 				} else {
-				 					int i = 0;
-				 					String[] nodeContent = new String[3];
+				 					List<String> nodeContent = new ArrayList<String>() ;
 				 					do {
-				 						
-				 						nodeContent[i] = currentNode.getContent();
+				 						nodeContent.add(currentNode.getContent());
 				 						currentNode = currentNode.getParent();
-				 						i++;
 				 					} while (currentNode.hasParent());
 				 					defUserChoice(nodeContent);	// Write for all purpose
 				}
@@ -76,28 +74,37 @@ public class TreeForMenu extends Tree<String> {
 		} while (true); 
 	}
 	
-	public String[] defUserChoice(String[] content) throws Exception {
-//		for(int k = 0; k < content.length; k++)
-//				System.out.println(content[k]);
-//		define all nesessery methods
+	public void defUserChoice(List<String> content) throws Exception {
+		boolean backtomenu = false;
 		do {
-			switch (content[1]) {
+			switch (content.get(content.size() - 1)) {
 			
-			case "New game":
-				StartSeans ss = new StartSeans(); // not only startSeans
-				ss.startSeans(content[0]);
+			case "New game" :
+				StartSeans ss = new StartSeans(); 
+				ss.startSeans(content.get(0));
 				break;
 				
-			case "Save game":
+//			case "Load game" :
+//				IOGames iog = new IOGames();
+//				iog.loadGame();
+//				break;
+				
+			case "Save game" :
 				IOGames iog = new IOGames();
-				iog.saveGame(content[0]);
+				iog.saveGame();
 				break;
 				
-			case "Exit":
+//			case "Help" :
+//				
+//				break;
+				
+			case "Exit" :
 				System.exit(0);
+				
+				default :
+					break;
 			}
-		
-		return content;
-		} while(true);
+			backtomenu = true;	
+		} while(!backtomenu);
 	}
 }

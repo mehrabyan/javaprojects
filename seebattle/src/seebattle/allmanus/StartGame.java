@@ -1,4 +1,4 @@
-package seebattle;
+package seebattle.allmanus;
 
 import menutree.TreeForMenu;
 

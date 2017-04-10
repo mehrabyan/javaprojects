@@ -10,13 +10,21 @@ public class StartSeans {
 			switch (st) {
 
 			case "Comp vs Comp":
-				gm.gameCompVsComp();
-				break;
+								gm.gameCompVsComp();
+								System.out.println("You choose game type : Comp vs Comp");
+								break;
+								
 			case "Comp vs Human":
-				gm.gameCompVsHuman();
-				break;
+								gm.gameCompVsHuman();
+								System.out.println("You choose game type : Comp vs Human");
+								break;
+								
 			case "Human vs Human":
-				gm.gameHumanVsHuman();
+								gm.gameHumanVsHuman();
+								System.out.println("You choose game type : Human vs Human");
+								break;
+								
+			default :
 				break;
 			}
 
